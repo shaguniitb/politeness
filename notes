@@ -1,0 +1,14 @@
+First Approach:
+
+Classifying requests according to words.
+
+For each word, collect the politeness score assigned to the request in which it occurs.
+Create a collection of (word, list of scores)
+average list of scores for each word to get (word, average score) for each score.
+
+For testing:
+request is polite if:
+Prob(polite | request) > Prob(Impolite | request)
+or Prob(request | polite) Prob(polite) > Prob(request | impolite) Prob(impolite)
+or Prob(request | polite) > Polite(request | impolite)
+or summation (Prob(word | polite)) > summation (Prob(word | impolite))

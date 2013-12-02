@@ -1,0 +1,8 @@
+*.jar
+*.class
+.metadata
+tmp/**
+*.bak
+*.swp
+.loadpath
+model_file.txt
