@@ -12,3 +12,21 @@ Prob(polite | request) > Prob(Impolite | request)
 or Prob(request | polite) Prob(polite) > Prob(request | impolite) Prob(impolite)
 or Prob(request | polite) > Polite(request | impolite)
 or summation (Prob(word | polite)) > summation (Prob(word | impolite))
+
+
+We'll look at two classifiers: 
+1) Bag of Words classifier (BOW)
+2) Linguistically Informed classifer (Ling.)
+
+We evaluate the classifiers first in an in-domain setting.
+So, we first train on the wikipedia data (80%) and test on wikipedia data (20%) too, using the leave-one-out cross validation procedure.
+We'll later evaluate the classifier in a cross-domain setting, where we train on one domain and test on the other.
+
+When training, we assume that request receiving top 25% of the scores are positive (polite) and the bottom 25% are negative (impolite). 
+0) Divide the data into 80% for training and 20% for testing.
+1) We sort the training requests by their politeness scores.
+2) Get top 25% of requests, and label them as positive.
+3) Get bottom 25% of requests, and label them as negative.
+4) Run SVM classifier training procedure on these requests.
+5) Test the classifier on testing data.
+6) Repeat the procedure for different sets of training and testing data, and then take the average performance.
