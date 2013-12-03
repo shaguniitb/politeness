@@ -51,8 +51,8 @@ public class Training {
 			String request = parts[2];
 			String norm_score_string = parts[13];
 			Float norm_score = Float.parseFloat(norm_score_string);
-			String clean_request = request.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase();	
-			scoreMap newScore = new scoreMap(request_id, clean_request, norm_score);
+//			String clean_request = request.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase();	
+			scoreMap newScore = new scoreMap(request_id, request, norm_score);
 			scoreMaps.add(newScore);
 		}		
 		reader.close();		
@@ -97,7 +97,7 @@ public class Training {
 			File dir = new File("data/" + folder);
 			dir.mkdir();
 			for (scoreMap s: map.get(folder)){
-				String fileName = dir + "/" + s.getId() + ".txt";
+				String fileName = dir + "/" + s.getId() + ".csv";
 				FileWriter writer = new FileWriter(fileName);
 				BufferedWriter wr = new BufferedWriter(writer);
 				wr.write(s.request);
@@ -109,11 +109,8 @@ public class Training {
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		String input_file = "/home/shagun/politeness/politeness_corpus/wikipedia.annotated.csv";
-		String model_file = "model_file.txt";
-		
-		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();		
-	
+		String input_file = "/home/shagun/politeness/politeness_corpus/wikipedia.annotated.csv";		
+		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();	
 		buildModel(h, input_file);
 		writeModelFile(h);
 	}

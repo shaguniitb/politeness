@@ -35,3 +35,9 @@ When training, we assume that request receiving top 25% of the scores are positi
 Created a dictionary 
 (class, all class instances)
 eg, ("polite", all polite requests), ("impolite", all impolite requests)
+
+
+Using weka:
+
+Converting to arff:
+java weka.core.converters.TextDirectoryLoader -dir /home/shagun/politeness/code/politeness/data > first.arff
