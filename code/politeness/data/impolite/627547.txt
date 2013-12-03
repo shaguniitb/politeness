@@ -1,0 +1,1 @@
+your first attempt at doing this also added a nowikiurlnowiki line to the article and thats what triggered the bot  perhaps you should get into the habit of using the show changes button

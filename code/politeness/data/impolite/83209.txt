@@ -1,0 +1,1 @@
+dear commander this source  berg ole f person oslo 1997 isbn 8299354528 is a norwegian source as signified by the langno tag hence the first letters of months is not supposed to be capital i thought that tagging sources with langno would prevent this problem isnt that correct

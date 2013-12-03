@@ -1,0 +1,1 @@
+a redirect works exactly the same way regardless of whether theres a space between redirect and the target articles name or not why bother removing spaces from the redirects if it doesnt change the functionality at all

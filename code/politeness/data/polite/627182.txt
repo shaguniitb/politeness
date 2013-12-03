@@ -1,0 +1,1 @@
+my question about the truncation operation is to understand the generic algorithm for applying a ring or unringing a dynkin node what method code do you use to get the higher dimensions truncated based on the coxeter dynkin ringed nodes

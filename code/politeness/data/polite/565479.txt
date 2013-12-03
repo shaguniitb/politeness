@@ -1,0 +1,1 @@
+i started working on missing translations of news titles inside citations but discovered that square brackets leave an ugly residue while round ones may not be optimal since they clash visually with the language ones would it be acceptable to just use the english version as title

@@ -1,0 +1,1 @@
+hey you seem to know a bit about coding so i figured you might have an answer here if i want use code to grab the target of a page known to be a redirect how would i do that

@@ -3,7 +3,7 @@ import java.util.Comparator;
 
 public class scoreMap {
 	private String id;
-	private String request;
+	public String request;
 	private Float norm_score;
 	
 	public String getId(){

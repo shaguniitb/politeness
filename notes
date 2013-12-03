@@ -30,3 +30,8 @@ When training, we assume that request receiving top 25% of the scores are positi
 4) Run SVM classifier training procedure on these requests.
 5) Test the classifier on testing data.
 6) Repeat the procedure for different sets of training and testing data, and then take the average performance.
+
+
+Created a dictionary 
+(class, all class instances)
+eg, ("polite", all polite requests), ("impolite", all impolite requests)

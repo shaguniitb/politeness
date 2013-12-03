@@ -1,0 +1,1 @@
+problem is how do you recognise the categories as there are thousands of them i have already made a program that scans the database and can locate the unstubbed articles so finding the untagged stubs is ok and awb automatically adds the stub tag if the article is short i just cant think how you could program it to automatically guess the type of stub any ideas

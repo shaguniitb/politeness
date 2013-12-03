@@ -1,0 +1,1 @@
+stephens solution certainly isnt optimal fancy giving me a basic rundown on the problem here and ill see if i can devise a more elegant one

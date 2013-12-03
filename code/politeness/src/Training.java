@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -57,12 +58,9 @@ public class Training {
 		reader.close();		
 	}
 	
-	public static void buildModel(HashMap<String, ArrayList<scoreMap>> map, String input_file) throws IOException{		
-		ArrayList <scoreMap> scoreMaps = new ArrayList<scoreMap> (); 		
-		createScoreMaps(input_file, scoreMaps);
+	public static void sortClassifyScoreMaps(HashMap<String, ArrayList<scoreMap>> map, ArrayList <scoreMap> scoreMaps){
 		Collections.sort(scoreMaps, new scoreMapScoreComparator());
-		int totalScores = scoreMaps.size();
-		System.out.println(totalScores);
+		int totalScores = scoreMaps.size();		
 		int count = 0;
 		ArrayList <scoreMap> sm = new ArrayList <scoreMap> ();		
 		for (scoreMap s: scoreMaps){
@@ -76,20 +74,37 @@ public class Training {
 				sm.add(s);
 			}			
 		}
+		
+	}
+	
+	public static void buildModel(HashMap<String, ArrayList<scoreMap>> map, String input_file) throws IOException{		
+		ArrayList <scoreMap> scoreMaps = new ArrayList<scoreMap> (); 		
+		createScoreMaps(input_file, scoreMaps);
+		sortClassifyScoreMaps(map, scoreMaps);
+
+//		if (map.containsKey("polite")){
+//			System.out.println(map.get("polite").size());
+//		}
+//		if (map.containsKey("impolite")){
+//			System.out.println(map.get("impolite").size());
+//		}
 	}
 
-	public static void writeModelFile(HashMap<String, ArrayList<Float>> map, String model_file) throws IOException{
-		FileWriter writer = new FileWriter(model_file);
-		BufferedWriter wr = new BufferedWriter(writer);
-		for (String key: map.keySet()){
-			wr.write(key);
-			ArrayList<Float> key_list = map.get(key);
-			Float average = calculateAverage(key_list);
-			wr.write("\t" + average.toString());			
-			wr.write("\n");
-		}
-		wr.close();
-		
+	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
+		File data = new File("data");
+		data.mkdir();
+		for (String folder: map.keySet()){
+			File dir = new File("data/" + folder);
+			dir.mkdir();
+			for (scoreMap s: map.get(folder)){
+				String fileName = dir + "/" + s.getId() + ".txt";
+				FileWriter writer = new FileWriter(fileName);
+				BufferedWriter wr = new BufferedWriter(writer);
+				wr.write(s.request);
+				wr.close();
+				writer.close();
+			}
+		}		
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -100,7 +115,7 @@ public class Training {
 		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();		
 	
 		buildModel(h, input_file);
-//		writeModelFile(h, model_file);
+		writeModelFile(h);
 	}
 
 }
