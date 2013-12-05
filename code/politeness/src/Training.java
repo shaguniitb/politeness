@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,9 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 //import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Training {
@@ -40,7 +43,36 @@ public class Training {
 		}
 	}
 	
+	public static int checkInList(List<String> list, String request){
+		request = request.toLowerCase();
+		int count = 0;
+		for (String listItem: list){
+			listItem = listItem.toLowerCase();
+			if (request.contains(listItem)){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static List <String> lexiconList(String fileName) throws IOException{
+		BufferedReader reader = new BufferedReader(new FileReader(fileName));
+		String line = null;		
+		List<String> outputList = new ArrayList<String>();
+		while ((line = reader.readLine()) != null){
+			line = line.trim();
+			outputList.add(line);
+		}
+		reader.close();		
+		return outputList;
+	}
+	
 	public static void createScoreMaps(String input_file, ArrayList <scoreMap> scoreMaps) throws IOException{
+		List<String> gratitudeList = Arrays.asList("appreciate", "thankful", "grateful", "recognize", "indebted");
+		List<String> deferenceList = Arrays.asList("Nice work", "respect", "polite");
+		List<String> greetingList = Arrays.asList("Hey", "Hi", "Hello", "take care", "tc", "bye", "Good morning", "Good afternoon", "Good evening", "Good night", "gn", "Dear", "howdy", "ciao", "what's up", "wassup", "yo", "whassup", "welcome", "hail");
+		List<String> positiveList = lexiconList("data/positive-words.txt");
+		List<String> negativeList = lexiconList("data/negative-words.txt");
 		BufferedReader reader = new BufferedReader(new FileReader(input_file));
 		String line = null;
 		reader.readLine();
@@ -52,7 +84,14 @@ public class Training {
 			String norm_score_string = parts[13];
 			Float norm_score = Float.parseFloat(norm_score_string);
 //			String clean_request = request.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase();	
-			scoreMap newScore = new scoreMap(request_id, request, norm_score);
+			scoreMap newScore = new scoreMap(request_id, request, norm_score);			
+			
+			newScore.isGratitude = checkInList(gratitudeList, request); 			
+			newScore.isDeference = checkInList(deferenceList, request);				
+			newScore.isGreeting = checkInList(greetingList, request);	
+			newScore.inPosLexicon = checkInList(positiveList, request);
+			newScore.inNegLexicon = checkInList(negativeList, request);
+			
 			scoreMaps.add(newScore);
 		}		
 		reader.close();		
@@ -89,6 +128,19 @@ public class Training {
 //			System.out.println(map.get("impolite").size());
 //		}
 	}
+	
+	public static void writeNext(BufferedWriter wr, String string) throws IOException{
+		wr.write("\t");
+		wr.write(string);
+	}
+	
+	public static void writeAdditionalFeatures(BufferedWriter wr, scoreMap s) throws IOException{
+		writeNext(wr, String.valueOf(s.isGratitude));
+		writeNext(wr, String.valueOf(s.isDeference));
+		writeNext(wr, String.valueOf(s.isGreeting));
+		writeNext(wr, String.valueOf(s.inPosLexicon));
+		writeNext(wr, String.valueOf(s.inNegLexicon));
+	}
 
 	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
 		File data = new File("data");
@@ -101,6 +153,7 @@ public class Training {
 				FileWriter writer = new FileWriter(fileName);
 				BufferedWriter wr = new BufferedWriter(writer);
 				wr.write(s.request);
+				writeAdditionalFeatures(wr, s);
 				wr.close();
 				writer.close();
 			}
@@ -109,7 +162,7 @@ public class Training {
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		String input_file = "/home/shagun/politeness/politeness_corpus/wikipedia.annotated.csv";		
+		String input_file = "../../politeness_corpus/wikipedia.annotated.csv";		
 		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();	
 		buildModel(h, input_file);
 		writeModelFile(h);
