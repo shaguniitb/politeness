@@ -5,11 +5,22 @@ public class scoreMap {
 	private String id;
 	public String request;
 	private Float norm_score;
-	public int isGratitude = 0;
-	public int isDeference = 0;
-	public int isGreeting = 0;
+	
+	public int numGratitude = 0;
+	public int numDeference = 0;
+	public int numGreeting = 0;
 	public int inPosLexicon = 0;
 	public int inNegLexicon = 0;
+	
+	public int numApologize = 0;
+	public int pleaseCount = 0;
+	public int pleaseStartCount = 0;
+	public int numIndirect = 0;
+	
+	public int numDirectQuestion = 0;
+	public int numDirectStart = 0;
+	public int numCounterFactual = 0;
+	public int numIndicative = 0;
 	
 	public String getId(){
 		return id;

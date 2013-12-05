@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
+import weka.core.converters.TextDirectoryLoader;
 
 public class Training {
 
@@ -73,6 +74,9 @@ public class Training {
 		List<String> greetingList = Arrays.asList("Hey", "Hi", "Hello", "take care", "tc", "bye", "Good morning", "Good afternoon", "Good evening", "Good night", "gn", "Dear", "howdy", "ciao", "what's up", "wassup", "yo", "whassup", "welcome", "hail");
 		List<String> positiveList = lexiconList("data/positive-words.txt");
 		List<String> negativeList = lexiconList("data/negative-words.txt");
+		
+		List<String> apologizingList = Arrays.asList("sorry", "pardon", "regret", "apologize", "ashamed", "regretful", "penitent");
+		
 		BufferedReader reader = new BufferedReader(new FileReader(input_file));
 		String line = null;
 		reader.readLine();
@@ -86,17 +90,95 @@ public class Training {
 //			String clean_request = request.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase();	
 			scoreMap newScore = new scoreMap(request_id, request, norm_score);			
 			
-			newScore.isGratitude = checkInList(gratitudeList, request); 			
-			newScore.isDeference = checkInList(deferenceList, request);				
-			newScore.isGreeting = checkInList(greetingList, request);	
+			newScore.numGratitude = checkInList(gratitudeList, request); 			
+			newScore.numDeference = checkInList(deferenceList, request);				
+			newScore.numGreeting = checkInList(greetingList, request);	
 			newScore.inPosLexicon = checkInList(positiveList, request);
 			newScore.inNegLexicon = checkInList(negativeList, request);
+			
+			newScore.numApologize = checkInList(apologizingList, request);
+			newScore.pleaseCount = checkInList(Arrays.asList("please"), request);
+			newScore.pleaseStartCount = pleaseStartCountCheck(request);
+			newScore.numIndirect = checkInList(Arrays.asList("by the way", "btw"), request);
+			
+			newScore.numDirectQuestion = directQuestionCheck(request);
+			newScore.numDirectStart = directStartCheck(request);
+			newScore.numCounterFactual = counterFactualCheck(request);
+			newScore.numIndicative = indicativeCheck(request);
 			
 			scoreMaps.add(newScore);
 		}		
 		reader.close();		
 	}
 	
+	public static int counterFactualCheck(String request){
+		String[] lines = request.split("\\r?\\n");
+		int count = 0;
+		for (String line: lines){
+			line = line.trim();
+			line = line.toLowerCase();
+			if (!line.startsWith("could") || line.startsWith("would")){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static int indicativeCheck(String request){
+		String[] lines = request.split("\\r?\\n");
+		int count = 0;
+		for (String line: lines){
+			line = line.trim();
+			line = line.toLowerCase();
+			if (!line.startsWith("can") || line.startsWith("will")){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+
+	public static int pleaseStartCountCheck(String request){
+		String[] lines = request.split("\\r?\\n");
+		int count = 0;
+		for (String line: lines){
+			line = line.trim();
+			line = line.toLowerCase();
+			if (line.startsWith("please")){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static int directQuestionCheck(String request){
+		String[] lines = request.split("\\r?\\n");
+		int count = 0;
+		for (String line: lines){
+			line = line.trim();
+			line = line.toLowerCase();
+			if (line.startsWith("wh") && line.endsWith("?")){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static int directStartCheck(String request){
+		String[] lines = request.split("\\r?\\n");
+		int count = 0;
+		for (String line: lines){
+			line = line.trim();
+			line = line.toLowerCase();
+			if (!line.startsWith("wh") && line.endsWith("?")){
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	
+
 	public static void sortClassifyScoreMaps(HashMap<String, ArrayList<scoreMap>> map, ArrayList <scoreMap> scoreMaps){
 		Collections.sort(scoreMaps, new scoreMapScoreComparator());
 		int totalScores = scoreMaps.size();		
@@ -130,16 +212,26 @@ public class Training {
 	}
 	
 	public static void writeNext(BufferedWriter wr, String string) throws IOException{
-		wr.write("\t");
+		wr.write(",");
 		wr.write(string);
 	}
 	
 	public static void writeAdditionalFeatures(BufferedWriter wr, scoreMap s) throws IOException{
-		writeNext(wr, String.valueOf(s.isGratitude));
-		writeNext(wr, String.valueOf(s.isDeference));
-		writeNext(wr, String.valueOf(s.isGreeting));
+		writeNext(wr, String.valueOf(s.numGratitude));
+		writeNext(wr, String.valueOf(s.numDeference));
+		writeNext(wr, String.valueOf(s.numGreeting));
 		writeNext(wr, String.valueOf(s.inPosLexicon));
 		writeNext(wr, String.valueOf(s.inNegLexicon));
+		
+		writeNext(wr, String.valueOf(s.numApologize));
+		writeNext(wr, String.valueOf(s.pleaseCount));
+		writeNext(wr, String.valueOf(s.pleaseStartCount));
+		writeNext(wr, String.valueOf(s.numIndirect));
+		
+		writeNext(wr, String.valueOf(s.numDirectQuestion));
+		writeNext(wr, String.valueOf(s.numDirectStart));
+		writeNext(wr, String.valueOf(s.numCounterFactual));
+		writeNext(wr, String.valueOf(s.numIndicative));
 	}
 
 	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
@@ -160,12 +252,12 @@ public class Training {
 		}		
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		String input_file = "../../politeness_corpus/wikipedia.annotated.csv";		
 		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();	
 		buildModel(h, input_file);
-		writeModelFile(h);
+		writeModelFile(h);		
 	}
 
 }

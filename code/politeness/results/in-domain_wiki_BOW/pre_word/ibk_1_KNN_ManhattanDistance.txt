@@ -1,0 +1,22 @@
+
+Correctly Classified Instances        1374               63.1434 %
+Incorrectly Classified Instances       802               36.8566 %
+Kappa statistic                          0.2629
+Mean absolute error                      0.3689
+Root mean squared error                  0.6065
+Relative absolute error                 73.7863 %
+Root relative squared error            121.2973 %
+Total Number of Instances             2176     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.437     0.174      0.715     0.437     0.542      0.646    polite
+                 0.826     0.563      0.595     0.826     0.692      0.646    impolite
+Weighted Avg.    0.631     0.369      0.655     0.631     0.617      0.646
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 475 613 |   a = polite
+ 189 899 |   b = impolite

@@ -122,28 +122,28 @@ public class CrossValidating {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		String input_arff = "../../weka-3-6-10/wiki_train.arff";
+		String input_arff = "../../weka-3-6-10/wikiLing.arff";
 		String folder;
 		
 		/* Preprocessing using Alphabetic Tokenizer*/
 		Instances pre_alpha_data = PreProcessing.preAlphaProcess(input_arff);
 		folder = "results/pre_alpha";
-//		runCrossValidations(pre_alpha_data, folder);
+		runCrossValidations(pre_alpha_data, folder);
 		
 		/* Preprocessing using Word Tokenizer*/
 		Instances pre_word_data = PreProcessing.preWordProcess(input_arff);
 		folder = "results/pre_word";
-//		runCrossValidations(pre_word_data, folder);
+		runCrossValidations(pre_word_data, folder);
 		
 		/* Preprocessing using Alphabetic Tokenizer and Attribute Selection */
 		Instances pre_alpha_attr_select = PreProcessing.AttributeSelecting(pre_alpha_data);
 		folder = "results/pre_alpha_with_attribute_selection";
-//		runCrossValidations(pre_alpha_attr_select, folder);
+		runCrossValidations(pre_alpha_attr_select, folder);
 		
 		/* Preprocessing using Word Tokenizer and Attribute Selection */
 		Instances pre_word_attr_select = PreProcessing.AttributeSelecting(pre_word_data);
 		folder = "results/pre_word_with_attribute_selection";
-//		runCrossValidations(pre_word_attr_select, folder);
+		runCrossValidations(pre_word_attr_select, folder);
 	}
 
 }
