@@ -1,1 +1,0 @@
-your reasoning is very sound it would appear that usgs is wrong and i have no problem with changing it back  in general what are your thoughts on using the gnis database for park coordinateselevations as we convert to the geobox

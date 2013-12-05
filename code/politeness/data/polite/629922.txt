@@ -1,1 +1,0 @@
-the reason for the malfunctioning redirects is that the character immediately after redirect is not an ordinary space but a nonbreaking space hex code 0xa0  out of curiosity how did you manage to create them

@@ -1,0 +1,67 @@
+All results files for experiments in this set are in folder set_2.
+Test option: Cross-validation Folds: 5 is used for each experiment.
+
+Experiment 1:
+Using Classifier: NaiveBayes
+
+Results are described in `results_1.txt'. This correctly classifies 76.83% of the instances.
+
+Experiment 2:
+Using Classifier: NaiveBayesMultinomial
+
+Results are described in `results_2.txt'. This correctly classifies 80.60% of the instances.
+
+Experiment 3:
+
+(3.1)
+
+Using Classifier: RandomForest
+numTrees: 10
+
+Results are described in `results_3.1.txt'. This correctly classifies 77.07% of the instances.
+
+(3.2)
+
+Using Classifier: RandomForest
+numTrees: 100
+
+Results are described in `results_3.2.txt'. This correctly classifies 79.96% of the instances.
+
+Experiment 4:
+
+(4.1)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 1
+Distance Function: Euclidean 
+
+Results are described in `results_4.1.txt'. This correctly classifies 71.50% of the instances.
+
+(4.2)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 10
+Distance Function: Euclidean 
+
+Results are described in `results_4.2.txt'. This correctly classifies 76.83% of the instances.
+
+(4.3)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 10
+Distance Function: Manhattan
+
+Results are described in `results_4.3.txt'. This correctly classifies 74.77% of the instances.
+
+Experiment 5:
+
+Using Classifier: J48 (Decision trees)
+
+Results are described in `results_5.txt'. This correctly classifies 73.89% of the instances.
+
+Experiment 6:
+
+Using Classifier: SMO
+
+Results are described in `results_6.txt'. This correctly classifies 82.12% of the instances.
+

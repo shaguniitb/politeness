@@ -1,0 +1,32 @@
+I'm evaluating the results for the file wiki_train.arff. The report files for each experiment set, results files and settings files are in the folder 'experiments'.
+
+Experiment set 1: 
+Please see set_1.txt for the results of experiments in this set.
+For each of the experiments in this set, I used StringToWordVector filter with settings in `settings_1.txt':
+
+Result:
+Instances: 2176
+Attributes: 476
+
+I then edited the resulting file to label 'polite/impolite' attribute as class attribute. Further work for each of the experiments is described in set_1.txt.
+
+
+Experiment set 2: 
+Please see set_2.txt for the results of experiments in this set.
+For each of the experiments in this set, I used StringToWordVector filter with settings in `settings_2.txt':
+
+Result:
+Instances: 2176
+Attributes: 467
+
+I then edited the resulting file to label 'polite/impolite' attribute as class attribute. .
+Improving this by using AttributeSelection filter:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+Result:
+Attributes: 115
+
+Further work for each of the experiments is described in set_2.txt
+

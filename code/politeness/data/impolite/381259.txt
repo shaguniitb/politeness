@@ -1,1 +1,0 @@
-i suppose i should not have used rollback i was aware of the problem but you had not solved it had you

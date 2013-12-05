@@ -1,1 +1,0 @@
-i do understand the bot was approved and is doing useful job but is it possible to modify it to not save the changes if it is only onetwo whitespaces

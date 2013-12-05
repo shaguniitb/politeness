@@ -1,1 +1,0 @@
-can i ask was this really the implication that you intended in making this change  and do you really think the rfc expressed consensus support for such a position

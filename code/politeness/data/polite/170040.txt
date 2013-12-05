@@ -1,1 +1,0 @@
-hey i saw that youre using huggle and wanted to try it out too i downloaded it but every time i try to open the program i get the message clr error 80004005 the program will now terminatewhat can i do to fix the problem

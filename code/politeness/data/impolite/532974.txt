@@ -1,1 +1,0 @@
-you removed the border issue coverage in url and your explanation was that its covered in another article where is it covered

@@ -1,1 +1,0 @@
-let me ask you this  assuming we take it that the player might have chosen any door to start with and the host may have opened any unchosen goathiding door why do you not insist that the starting sample space must include all the possible door combinations

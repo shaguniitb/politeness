@@ -36,8 +36,3 @@ Created a dictionary
 (class, all class instances)
 eg, ("polite", all polite requests), ("impolite", all impolite requests)
 
-
-Using weka:
-
-Converting to arff:
-java weka.core.converters.TextDirectoryLoader -dir /home/shagun/politeness/code/politeness/data > first.arff

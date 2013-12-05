@@ -1,1 +1,0 @@
-while watching the contribs i noticed that the bot blanked url which has already been checked and is listed at url isnt that supposed to be the thing that these lists of mrgs were supposed to prevent

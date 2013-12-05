@@ -1,0 +1,122 @@
+All results files for experiments in this set are in folder set_1.
+
+Experiment 1:
+
+(1.1)
+
+Using Classifier: SMO
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_1.1.txt'. I correctly classify 79.77% of the instances.
+
+(1.2)
+
+Improving this by using AttributeSelection filter:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+Result:
+Attributes: 113
+
+Using Classifier: SMO
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_1.2.txt'. I correctly classify 82.03% of the instances.
+
+Experiment 2:
+
+I used AttributeSelection filter with:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+Result:
+Attributes: 113
+
+Using Classifier: NaiveBayes
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_2.txt'. This correctly classifies 79.97% of the instances.
+
+Experiment 3:
+
+I used AttributeSelection filter with:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+Using Classifier: NaiveBayesMultinomial
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_3.txt'. This correctly classifies 80.24% of the instances.
+
+Experiment 4:
+
+I used AttributeSelection filter with:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+(4.1)
+
+Using Classifier: RandomForest
+numTrees: 10
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_4.1.txt'. This correctly classifies 76.01% of the instances.
+
+(4.2)
+
+Using Classifier: RandomForest
+numTrees: 100
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_4.2.txt'. This correctly classifies 80.00% of the instances.
+
+Experiment 5:
+
+I used AttributeSelection filter with:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+(5.1)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 1
+Distance Function: Euclidean 
+
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_5.1.txt'. This correctly classifies 70.86% of the instances.
+
+(5.2)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 10
+Distance Function: Euclidean 
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_5.2.txt'. This correctly classifies 77.25% of the instances.
+
+(5.3)
+
+Using Classifier: lazy.IBk (k nearest neighbor)
+KNN: 10
+Distance Function: Manhattan 
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_5.3.txt'. This correctly classifies 75.18% of the instances.
+
+Experiment 6:
+
+I used AttributeSelection filter with:
+
+evaluator: InfoGainAttributeEval
+search: Ranker with threshold 0.0
+
+Using Classifier: J48 (Decision trees)
+Test option: Cross-validation Folds: 5
+
+Results are described in `results_6.txt'. This correctly classifies 70.86% of the instances.

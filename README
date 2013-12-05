@@ -1,0 +1,16 @@
+politeness
+==========
+
+A computational approach to politeness with application to social factors
+
+To begin with, I used the Training.java file in 'code/politeness/src' to create a data folder, that has two subfolders - 'polite' and 'impolite'. The java program reads requests in the input csv file, and creates a new file for each request in the top and bottom quartile of requests (when sorted by their politeness scores). If the request is deemed to be 'polite', the file corresponding to it is created in the 'data/polite' folder. If it is deemed as 'impolite', the file is created in the 'data/impolite' folder.  
+
+I'm Using weka for the classification.
+java -jar weka.jar
+
+First, I selected the SimpleCLI application, and converting data files to arff format:
+java weka.core.converters.TextDirectoryLoader -dir /home/shagun/politeness/code/politeness/data > wiki_train.arff
+
+Then, I selected the Explorer application of weka.
+I preprocessed this arff file using various preprocessing techniques made available by weka.
+I then trained different classifiers on this processed data, and checked their performance. The results are described in report.txt.

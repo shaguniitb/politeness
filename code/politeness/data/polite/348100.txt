@@ -1,1 +1,0 @@
-hi im new to rc patrol and i was wondering how you do the reverted edits by x to version by y edit summary is there a shortcut to reverting an edit

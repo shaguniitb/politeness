@@ -1,1 +1,0 @@
-hi the fontsize for the links in this template may be on the small side but it seems to be floating okay  or do i need to check more places where its used
