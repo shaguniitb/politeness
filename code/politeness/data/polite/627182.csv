@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 My question about the truncation operation is to understand the generic algorithm for applying a ring (or un-ringing) a Dynkin node. What method (code) do you use to get the higher dimensions truncated based on the Coxeter Dynkin ringed nodes?,0,0,2,0,2,0,0,0,0,0,1,1,1

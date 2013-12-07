@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Sorry, I understand, the bot has just moved the category of the sub-cat, not merged it. Is the bot going to proceed to the next layer - or does that have to be done manually?",0,0,0,0,1,1,0,0,0,0,0,1,1

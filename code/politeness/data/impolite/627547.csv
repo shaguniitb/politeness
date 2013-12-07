@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Your first attempt at doing this also added a <nowiki>""<url>""</nowiki> line to the article, and that's what triggered the bot.  Perhaps you should get into the habit of using the 'Show changes button?",0,0,2,1,2,0,0,0,0,0,0,1,1

@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Dear commander, this source: '''* Berg, Ole F.: <person>, Oslo 1997 ISBN 82-993545-2-8''' is a Norwegian source, as signified by the lang|no tag, hence the first letters of months is not supposed to be capital. I thought that tagging sources with lang|no would prevent this problem, isn't that correct?",0,0,3,1,4,0,0,0,0,0,0,1,1

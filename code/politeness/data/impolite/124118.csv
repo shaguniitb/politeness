@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "I didn't have those in <person> because they were already included under the tributaries categories. Is this one of those ""basketball player"" exceptions?",0,0,2,1,0,0,0,0,0,0,0,1,1

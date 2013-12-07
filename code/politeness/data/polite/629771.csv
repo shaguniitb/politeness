@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Thanks, I tried to do that but don't know how to do it? Can you help?",0,0,1,1,0,0,0,0,0,0,0,1,1

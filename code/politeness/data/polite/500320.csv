@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 I noticed you've been adding the template <person> to pages - I'm sure there's a good reason but I'm totally puzzled as to why. Can you explain what it does?,0,0,1,2,3,0,0,0,0,0,1,1,1

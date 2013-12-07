@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Yes, I know what a score ''card'' is, but you wrote ""score '''car'''"" in the article. Was that a typo, or is there really such a thing as a score ""car""?",0,0,2,0,1,0,0,0,0,0,0,1,1

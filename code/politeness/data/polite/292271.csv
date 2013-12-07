@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Sounds good then.  In this case, would it be wise to simply remove the ""influence"" field since it simply overlaps with ""subjects""?",0,0,1,2,1,0,0,0,0,0,0,1,1

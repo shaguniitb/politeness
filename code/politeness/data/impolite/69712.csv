@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "You mean ""the higher solubility in the ocean""? Solubility of what?",0,0,2,0,0,0,0,0,0,0,0,1,1

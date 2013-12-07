@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "What do you mean ""personal attack""? Why don't site what my ""personal attack"" is?",0,0,1,0,1,0,0,0,0,0,0,1,1

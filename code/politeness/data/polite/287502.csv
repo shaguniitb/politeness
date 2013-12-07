@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Hey Dan, I see you around but we haven't talked in a bit. What are you up to these days?",0,0,2,0,0,0,0,0,0,0,0,1,1

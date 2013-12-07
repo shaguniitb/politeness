@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Hi, it looks like the en/em distinction is being preserved. What do you see as the advantage of changing the way they're currently written?",0,0,3,3,1,0,0,0,0,0,0,1,1

@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Hey JC: I saw you move <url> to <url>, which is great, but I was surprised you didn't fix any of the double redirects that resulted.  Also, the related essay is still entitled <url>; should that be moved (over redirect) as well?",0,0,3,5,2,0,0,0,0,0,0,1,1

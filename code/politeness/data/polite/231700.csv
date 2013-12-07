@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Hi, I noticed that you've pointed out an accuracy in the restoration of <url> used in the article. I've just started up a review page for paleoart here, and started a section for that image: <url> Would you mind commenting on it so it can be fixed?",0,0,2,0,2,0,0,0,0,0,0,1,1

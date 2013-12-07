@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 Thanks for the revert on <url>. Kinda curious how this blanking is always done by IPs that trace back to USAF installations isn't it?,0,0,1,1,2,0,0,0,0,0,1,1,1

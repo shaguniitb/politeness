@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "Hi, I just couldn't understand <url> ! Could you explain,please ?",0,0,2,1,2,0,1,0,0,0,0,1,1

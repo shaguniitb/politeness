@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "You've violated <url> on <url>, with 2 reverts in half an hour. Would you like to revert yourself to avoid being blocked again?",0,0,1,2,2,0,0,0,0,0,0,1,1

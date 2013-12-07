@@ -1,1 +1,2 @@
+request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
 "You realize the bot maintains a separate page, right? Is it not possible that the ""problem"" is having the pages inconsistent?",0,0,1,2,3,0,0,0,0,0,0,1,1
