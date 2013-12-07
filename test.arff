@@ -1,0 +1,19 @@
+@relation 135
+
+@attribute request {'I moved \'\'\'Engine Arm Aqueduct\'\'\' to <url>, because there seemed to be much more content about the canal than the actual <url>. Does that seem reasonable, to you?'}
+@attribute numGratitude numeric
+@attribute numDeference numeric
+@attribute numGreeting numeric
+@attribute inPosLexicon numeric
+@attribute inNegLexicon numeric
+@attribute numApologize numeric
+@attribute pleaseCount numeric
+@attribute pleaseStartCount numeric
+@attribute numIndirect numeric
+@attribute numDirectQuestion numeric
+@attribute numDirectStart numeric
+@attribute numCounterFactual numeric
+@attribute numIndicative numeric
+
+@data
+'I moved \'\'\'Engine Arm Aqueduct\'\'\' to <url>, because there seemed to be much more content about the canal than the actual <url>. Does that seem reasonable, to you?',0,0,1,1,0,0,0,0,0,0,0,1,1

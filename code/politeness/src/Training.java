@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import weka.core.converters.TextDirectoryLoader;
+//import weka.core.converters.TextDirectoryLoader;
 
 public class Training {
 
@@ -233,23 +233,59 @@ public class Training {
 		writeNext(wr, String.valueOf(s.numCounterFactual));
 		writeNext(wr, String.valueOf(s.numIndicative));
 	}
+	
+	public static void InitializeArff(BufferedWriter wr) throws IOException{
+		wr.write("@relation politeness\n\n");
+		
+		wr.write("@attribute request string\n");
+		
+		wr.write("@attribute numGratitude numeric\n");
+		wr.write("@attribute numDeference numeric\n");
+		wr.write("@attribute numGreeting numeric\n");		
+		wr.write("@attribute inPosLexicon numeric\n");
+		wr.write("@attribute inNegLexicon numeric\n");
+		
+		wr.write("@attribute numApologize numeric\n");
+		wr.write("@attribute pleaseCount numeric\n");
+		wr.write("@attribute pleaseStartCount numeric\n");
+		wr.write("@attribute numIndirect numeric\n");
+		
+		wr.write("@attribute numDirectQuestion numeric\n");
+		wr.write("@attribute numDirectStart numeric\n");
+		wr.write("@attribute numCounterFactual numeric\n");		
+		wr.write("@attribute numIndicative numeric\n");
+		
+		wr.write("@attribute class {polite,impolite}\n");
+		wr.write("\n");
+		
+		wr.write("@data\n");
+		
+	}
 
 	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
 		File data = new File("data");
 		data.mkdir();
-		for (String folder: map.keySet()){
-			File dir = new File("data/" + folder);
-			dir.mkdir();
-			for (scoreMap s: map.get(folder)){
-				String fileName = dir + "/" + s.getId() + ".csv";
-				FileWriter writer = new FileWriter(fileName);
-				BufferedWriter wr = new BufferedWriter(writer);
-				wr.write(s.request);
+		String fileName = "../../weka-3-6-10/wikiLing.arff";
+		String request;	
+		FileWriter writer = new FileWriter(fileName);
+		BufferedWriter wr = new BufferedWriter(writer);	
+		InitializeArff(wr);
+		for (String label: map.keySet()){
+			for (scoreMap s: map.get(label)){
+				request = s.request;
+				request = request.replaceAll("\"", "\\\\\"");
+				request = request.replaceAll("\'", "\\\\\'");
+				request = "\'" + request + "\'";
+				wr.write(request);
 				writeAdditionalFeatures(wr, s);
-				wr.close();
-				writer.close();
+				wr.write(",");
+				wr.write(label);
+				wr.write("\n");
 			}
-		}		
+						
+		}
+		wr.close();
+		writer.close();
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
