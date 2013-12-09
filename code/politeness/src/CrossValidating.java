@@ -122,7 +122,8 @@ public class CrossValidating {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		String input_arff = "../../weka-3-6-10/wikiLing.arff";
+//		String input_arff = "../../weka-3-6-10/wikiLing.arff";
+		String input_arff = "/home/shagun/final_arff.arff";
 		String folder;
 		
 		/* Preprocessing using Alphabetic Tokenizer*/

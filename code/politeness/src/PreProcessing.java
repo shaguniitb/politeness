@@ -15,7 +15,8 @@ public class PreProcessing {
 		Instances data = source.getDataSet();		
 		if (data.classIndex() == -1){
 			data.setClassIndex(data.numAttributes() - 1);
-		}
+		}		
+		data.setClassIndex(data.numAttributes() - 2);
 		StringToWordVector swv = new StringToWordVector();
 		AlphabeticTokenizer at = new AlphabeticTokenizer();
 		swv.setTFTransform(true);
@@ -24,6 +25,7 @@ public class PreProcessing {
 		swv.setOutputWordCounts(true);
 		swv.setTokenizer(at);
 		swv.setInputFormat(data);
+		swv.setAttributeNamePrefix("pre_");
 		Instances newData = Filter.useFilter(data, swv);
 		return newData;
 	}
@@ -34,6 +36,7 @@ public class PreProcessing {
 		if (data.classIndex() == -1){
 			data.setClassIndex(data.numAttributes() - 1);
 		}
+		data.setClassIndex(data.numAttributes() - 2);
 		StringToWordVector swv = new StringToWordVector();		
 		WordTokenizer wt = new WordTokenizer();
 		swv.setTFTransform(true);
@@ -42,6 +45,7 @@ public class PreProcessing {
 		swv.setOutputWordCounts(true);
 		swv.setTokenizer(wt);
 		swv.setInputFormat(data);
+		swv.setAttributeNamePrefix("pre_");
 		Instances newData = Filter.useFilter(data, swv);
 		return newData;
 	}
