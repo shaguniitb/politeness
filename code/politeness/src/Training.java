@@ -81,11 +81,12 @@ public class Training {
 		String line = null;
 		reader.readLine();
 		while ((line = reader.readLine()) != null){
+			System.out.println(line);
 			String [] parts = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 //			String community = parts[0];
-			String request_id = parts[1];
-			String request = parts[2];
-			String norm_score_string = parts[13];
+			String request_id = parts[0];
+			String request = parts[1];
+			String norm_score_string = parts[2];
 			Float norm_score = Float.parseFloat(norm_score_string);
 //			String clean_request = request.replaceAll("[^a-zA-Z0-9 ]", "").toLowerCase();	
 			scoreMap newScore = new scoreMap(request_id, request, norm_score);			
@@ -265,7 +266,7 @@ public class Training {
 	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
 		File data = new File("data");
 		data.mkdir();
-		String fileName = "../../weka-3-6-10/wikiLing.arff";
+		String fileName = "/home/shagun/stack-output.arff";
 		String request;	
 		FileWriter writer = new FileWriter(fileName);
 		BufferedWriter wr = new BufferedWriter(writer);	
@@ -290,7 +291,7 @@ public class Training {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		String input_file = "../../politeness_corpus/wikipedia.annotated.csv";		
+		String input_file = "/home/shagun/output.csv";		
 		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();	
 		buildModel(h, input_file);
 		writeModelFile(h);		

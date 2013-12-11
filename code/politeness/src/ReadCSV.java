@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
@@ -20,17 +21,25 @@ public class ReadCSV {
 		CSVWriter writer = new CSVWriter(new FileWriter(output_file), ',');		
 		String [] nextLine, writeLine;	
 		reader.readNext();
+		
+		String line = null;
+		String id = null;		
 		String request = null;
+		String score = null;
 		writeLine = new String [2];
-		while ((nextLine = reader.readNext()) != null) {			
-			writeLine[0] = nextLine[0];
-			request = nextLine[1];
-			request = request.replaceAll("\"", "&quote;");
-			request = request.replaceAll("\'", "&quote;");
-			request = request.replaceAll(",", "");
-			request = request.replaceAll("\n", "");
+		while ((nextLine = reader.readNext()) != null) {	
+			
+			request = nextLine[0];
+			score = nextLine[1];
+									
+//			request = request.replaceAll("\"", "&quote;");
+//			request = request.replaceAll("\'", "&quote;");
+//			request = request.replaceAll(",", "");
+//			request = request.replaceAll("\n", "");			
 //			request = "\'" + request + "\'";
-			writeLine[1] = request;
+			writeLine[0] = request;
+			writeLine[1] = score;
+						
 			writer.writeNext(writeLine);
 			
 		}
@@ -58,12 +67,12 @@ public class ReadCSV {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		String input_file = "/home/shagun/stack-exchange.annotated.csv";
+		String input_file = "/home/shagun/output.csv";
 		String output_file = "/home/shagun/alt_output.csv";
 		String parse_input_file = "/home/shagun/alt_output.csv";
 		String parse_output_file = "/home/shagun/final_arff.arff";
-		parseCSV(input_file, output_file);
-		usingLoader(parse_input_file, parse_output_file);
+//		parseCSV(input_file, output_file);
+		usingLoader(input_file, parse_output_file);
 
 	}
 
