@@ -1,0 +1,58 @@
+First Approach:
+
+Classifying requests according to words.
+
+For each word, collect the politeness score assigned to the request in which it occurs.
+Create a collection of (word, list of scores)
+average list of scores for each word to get (word, average score) for each score.
+
+For testing:
+request is polite if:
+Prob(polite | request) > Prob(Impolite | request)
+or Prob(request | polite) Prob(polite) > Prob(request | impolite) Prob(impolite)
+or Prob(request | polite) > Polite(request | impolite)
+or summation (Prob(word | polite)) > summation (Prob(word | impolite))
+
+
+We'll look at two classifiers: 
+1) Bag of Words classifier (BOW)
+2) Linguistically Informed classifer (Ling.)
+
+We evaluate the classifiers first in an in-domain setting.
+So, we first train on the wikipedia data (80%) and test on wikipedia data (20%) too, using the leave-one-out cross validation procedure.
+We'll later evaluate the classifier in a cross-domain setting, where we train on one domain and test on the other.
+
+Created a dictionary 
+(class, all class instances)
+eg, ("polite", all polite requests), ("impolite", all impolite requests)
+
+Using positive and negative lexicon for building features.
+ 
+ This file contains a list of POSITIVE opinion words (or sentiment words).
+
+
+;
+; This file and the papers can all be downloaded from 
+;    http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html
+;
+; If you use this list, please cite one of the following two papers:
+;
+;   Minqing Hu and Bing Liu. "Mining and Summarizing Customer Reviews." 
+;       Proceedings of the ACM SIGKDD International Conference on Knowledge 
+;       Discovery and Data Mining (KDD-2004), Aug 22-25, 2004, Seattle, 
+;       Washington, USA, 
+;   Bing Liu, Minqing Hu and Junsheng Cheng. "Opinion Observer: Analyzing 
+;       and Comparing Opinions on the Web." Proceedings of the 14th 
+;       International World Wide Web conference (WWW-2005), May 10-14, 
+;       2005, Chiba, Japan.
+;
+
+I'm Using weka for the classification.
+java -jar weka.jar
+
+First, I selected the SimpleCLI application, and converting data files to ARFF format:
+java weka.core.converters.TextDirectoryLoader -dir /home/shagun/politeness/code/politeness/data > wiki_train.arff
+
+Then, I selected the Explorer application of weka.
+I preprocessed this ARFF file using various preprocessing techniques made available by weka.
+I then trained different classifiers on this processed data, and checked their performance. The results are described in report.txt.

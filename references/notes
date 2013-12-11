@@ -1,0 +1,27 @@
+
+
+;
+; This file and the papers can all be downloaded from 
+;    http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html
+;
+; If you use this list, please cite one of the following two papers:
+;
+;   Minqing Hu and Bing Liu. "Mining and Summarizing Customer Reviews." 
+;       Proceedings of the ACM SIGKDD International Conference on Knowledge 
+;       Discovery and Data Mining (KDD-2004), Aug 22-25, 2004, Seattle, 
+;       Washington, USA, 
+;   Bing Liu, Minqing Hu and Junsheng Cheng. "Opinion Observer: Analyzing 
+;       and Comparing Opinions on the Web." Proceedings of the 14th 
+;       International World Wide Web conference (WWW-2005), May 10-14, 
+;       2005, Chiba, Japan.
+;
+
+I'm Using weka for the classification.
+java -jar weka.jar
+
+First, I selected the SimpleCLI application, and converting data files to ARFF format:
+java weka.core.converters.TextDirectoryLoader -dir /home/shagun/politeness/code/politeness/data > wiki_train.arff
+
+Then, I selected the Explorer application of weka.
+I preprocessed this ARFF file using various preprocessing techniques made available by weka.
+I then trained different classifiers on this processed data, and checked their performance. The results are described in report.txt.

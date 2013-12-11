@@ -1,2 +1,0 @@
-request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
-I think a bot could come along later and remove those double returns. Is there a way of coding a space into the template itself?,0,0,1,0,2,0,0,0,0,0,1,1,1

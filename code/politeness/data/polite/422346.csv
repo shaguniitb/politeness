@@ -1,2 +1,0 @@
-request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
-"(sorry for delayed response) I think it would be difficult to intergrate them, my program would probably work more easily from a list of articles with typos generated from the database, with the spelling correction code built in to the program. While on the subject, are you planning on running Humanbot again soon?",0,0,2,3,6,1,0,0,0,0,0,1,1

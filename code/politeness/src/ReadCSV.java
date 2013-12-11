@@ -67,12 +67,12 @@ public class ReadCSV {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		String input_file = "/home/shagun/output.csv";
-		String output_file = "/home/shagun/alt_output.csv";
+		String input_file = "/home/shagun/blogs.csv";
+		String output_file = "/home/shagun/blogs.arff";
 		String parse_input_file = "/home/shagun/alt_output.csv";
 		String parse_output_file = "/home/shagun/final_arff.arff";
 //		parseCSV(input_file, output_file);
-		usingLoader(input_file, parse_output_file);
+		usingLoader(input_file, output_file);
 
 	}
 

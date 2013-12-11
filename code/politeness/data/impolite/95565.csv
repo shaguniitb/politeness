@@ -1,2 +1,0 @@
-request,numGratitude,numDeference,numGreeting,inPosLexicon,inNegLexicon,numApologize,pleaseCount,pleaseStartCount,numIndirect,numDirectQuestion,numDirectStart,numCounterFactual,numIndicative
-"Tom, that article is ready for publication, was written by someone else, and your changes aren't improving it.  Did MER-C ask you to work on it?",0,0,1,4,1,0,0,0,0,0,0,1,1
