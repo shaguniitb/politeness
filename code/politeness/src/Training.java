@@ -263,12 +263,11 @@ public class Training {
 		
 	}
 
-	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map) throws IOException{
+	public static void writeModelFile(HashMap<String, ArrayList<scoreMap>> map, String output_file) throws IOException{
 		File data = new File("data");
-		data.mkdir();
-		String fileName = "/home/shagun/stack-output.arff";
+		data.mkdir();		
 		String request;	
-		FileWriter writer = new FileWriter(fileName);
+		FileWriter writer = new FileWriter(output_file);
 		BufferedWriter wr = new BufferedWriter(writer);	
 		InitializeArff(wr);
 		for (String label: map.keySet()){
@@ -291,10 +290,11 @@ public class Training {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		String input_file = "/home/shagun/output.csv";		
+		String input_file = "/home/shagun/output.csv";	
+		String output_file = "/home/shagun/stack_arff.arff";
 		HashMap<String, ArrayList<scoreMap>> h = new HashMap<String, ArrayList<scoreMap>>();	
 		buildModel(h, input_file);
-		writeModelFile(h);		
+		writeModelFile(h, output_file);		
 	}
 
 }

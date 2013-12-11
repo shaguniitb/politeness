@@ -80,7 +80,10 @@ public class CrossValidating {
 		String matrixString = eval.toMatrixString();
 		WriteOutput(output_file, matrixString, true);
 		Double errorRate = (double) Math.round(eval.errorRate()*100)/100;		
-		System.out.println(output_file + "\t" + errorRate.toString());		
+		String printValue = output_file + "\t" + errorRate.toString(); 
+		System.out.println(printValue);
+		String summary_file = "results/summary.txt";
+		WriteOutput(summary_file, printValue, true);
 	}
 	
 	public static void WriteOutput(String fileName, String output, boolean append) throws IOException{
@@ -122,28 +125,31 @@ public class CrossValidating {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		String input_arff = "../../weka-3-6-10/stack_BOW.arff";
+		String input_arff = "../../weka-3-6-10/stack_Ling.arff";
 		
-		String folder;
+		String main_folder = "results/in-domain_stack_Ling";
+		File data = new File(main_folder);
+		String folder = null;
+		data.mkdir();
 		
 		/* Preprocessing using Alphabetic Tokenizer*/
 		Instances pre_alpha_data = PreProcessing.preAlphaProcess(input_arff);
-		folder = "results/pre_alpha";
+		folder = main_folder + "/pre_alpha";
 		runCrossValidations(pre_alpha_data, folder);
 		
 		/* Preprocessing using Word Tokenizer*/
 		Instances pre_word_data = PreProcessing.preWordProcess(input_arff);
-		folder = "results/pre_word";
+		folder = main_folder + "/pre_word";
 		runCrossValidations(pre_word_data, folder);
 		
 		/* Preprocessing using Alphabetic Tokenizer and Attribute Selection */
 		Instances pre_alpha_attr_select = PreProcessing.AttributeSelecting(pre_alpha_data);
-		folder = "results/pre_alpha_with_attribute_selection";
+		folder = main_folder + "/pre_alpha_with_attribute_selection";
 		runCrossValidations(pre_alpha_attr_select, folder);
 		
 		/* Preprocessing using Word Tokenizer and Attribute Selection */
 		Instances pre_word_attr_select = PreProcessing.AttributeSelecting(pre_word_data);
-		folder = "results/pre_word_with_attribute_selection";
+		folder = main_folder + "/pre_word_with_attribute_selection";
 		runCrossValidations(pre_word_attr_select, folder);
 	}
 

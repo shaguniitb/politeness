@@ -3,6 +3,8 @@ politeness
 
 A computational approach to politeness with application to social factors
 
+The reference papers used for this project are in the folder `references'.
+
 To begin with, I used the Training.java file in 'code/politeness/src' to create a data folder, that has two subfolders - 'polite' and 'impolite'. The java program reads requests in the input csv file, and creates a new file for each request in the top and bottom quartile of requests (when sorted by their politeness scores). If the request is deemed to be 'polite', the file corresponding to it is created in the 'data/polite' folder. If it is deemed as 'impolite', the file is created in the 'data/impolite' folder.  
 
 I'm Using weka for the classification.

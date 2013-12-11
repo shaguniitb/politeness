@@ -1,0 +1,24 @@
+
+Correctly Classified Instances        1299               64.95   %
+Incorrectly Classified Instances       701               35.05   %
+Kappa statistic                          0.2991
+Mean absolute error                      0.4089
+Root mean squared error                  0.4782
+Relative absolute error                 81.77   %
+Root relative squared error             95.6358 %
+Coverage of cases (0.95 level)          99      %
+Mean rel. region size (0.95 level)      95.8    %
+Total Number of Instances             2000     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.554    0.255    0.685      0.554    0.613      0.305    0.718     0.673     polite
+                 0.745    0.446    0.625      0.745    0.680      0.305    0.718     0.702     impolite
+Weighted Avg.    0.650    0.350    0.655      0.650    0.646      0.305    0.718     0.687     
+
+=== Confusion Matrix ===
+
+   a   b   <-- classified as
+ 555 446 |   a = polite
+ 255 744 |   b = impolite

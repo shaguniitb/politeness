@@ -24,13 +24,13 @@ with open(input_file, 'rb') as csvfile:
             if ('Stack Overflow' in community):
                 alist += [{'request_id': request_id, 'score':score, 'request': request}]
 
-print len(alist)
-alist = sorted(alist, key = lambda k: k['score'])
-count = len(alist)
+#print len(alist)
+#alist = sorted(alist, key = lambda k: k['score'])
+#count = len(alist)
 
 with open(output_file, 'wb') as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    for element in alist[0:count/4]:
-        spamwriter.writerow([element['request'], 'impolite'])
-    for element in alist[count*3/4: count]:
-        spamwriter.writerow([element['request'], 'polite'])
+    for element in alist:
+        spamwriter.writerow([element['request_id'], element['request'], element['score']])
+#    for element in alist[count*3/4: count]:
+#        spamwriter.writerow([element['request_id'], element['request'], 'polite'])
