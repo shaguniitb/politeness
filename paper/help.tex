@@ -1,0 +1,643 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % Required to insert images
+\usepackage{caption}
+\newcommand{\Break}{\State \textbf{break} }
+\algblockdefx[class]{class}{endclass}[1][]{\textbf{class} #1}{\textbf{End class}}
+\algtext*{endclass}
+\algblockdefx[method]{method}{endmethod}[1][]{\textbf{method} #1}{\textbf{End method}}
+\algtext*{endmethod}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Calculating Edit Distance using MapReduce}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Shagun Jhaver}
+\IEEEauthorblockA{Dept. of Computer Science\\
+The University of Texas at Dallas \\
+Richardson, Texas 75080\\
+Email: sxj124330@utdallas.edu}
+\and
+\IEEEauthorblockN{Dr. Latifur Khan}
+\IEEEauthorblockA{Dept. of Computer Science\\
+The University of Texas at Dallas \\
+Richardson, Texas 75080\\
+Email: lkhan@utdallas.edu}
+}
+
+
+
+
+% make the title area
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+
+\begin{abstract}
+%\boldmath
+Given two strings $X$ and $Y$ over a finite alphabet, the edit distance between $X$ and $Y$, $d(X, Y)$ is the number of elimentary edit operations required to edit $X$ into $Y$. A dynamic programming algorithm elegantly computes this distance. In this paper, we investigate the parallelization of calculating edit distance for a large set of strings using MapReduce, a popular parallel computing framework. We propose SIM\_MR and PRE\_MR algorithms, parallel versions of the dynamic programming solution, and present implementations of these algorithms. We study different cases by varying algorithm parameters, input size and number of parallel nodes, and analytically and experimentally confirm the superiority of our methods over the usual dynamic programming approach. This study demonstrates how MapReduce parallelization opens new avenues of designing for dynamic programming algorithms.
+
+Index Terms - Edit distance, Levenshtein distance, MapReduce, string manipulation, dynamic programming
+\end{abstract}
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+\section{Introduction}
+Given two strings $s$ and $t$, the minimum number of edit operations required to transform $s$ into $t$ is called the edit distance. The edit operations commonly allowed for computing edit distance are: (i) insert a character into a string; (ii) delete a character from a string and (iii) replace a character of a string by another character. For these operations, edit distance is sometimes called Levenshtein distance \cite{edit-stanford}. For example, the edit distance between `tea' and `pet' is 2.
+
+There are a number of algorithms that compute edit distances \cite{algo-1}, \cite{algo-2}, \cite{algo-3} and solve other related problems \cite{algo-4}, \cite{algo-5}, \cite{algo-6}. Edit distance has placed an important role in a variety of applications due to its computational efficiency and representational efficacy. It can be used in approximate string matching, optical character recognition, error correcting, pattern recognition \cite{appl-1}, redisplay algorithms for video editors, signal processing, speech recognition, analysis of bird songs and comparing genetic sequences \cite{Andres}. Sankoff and Kruskal provide a comprehensive compilation of papers on the problem of calculating edit distance \cite{Kruskal}.
+
+The cost of computing edit distance between any two strings is roughly proportional to the product of the two string lengths. This makes the task of computing the edit distance for a large set of strings difficult. It is computationally heavy and requires managing large data sets, thereby calling for a parallel processing implementation. MapReduce, a general-purpose programming model for processing huge amounts of data with a parallel, distributed algorithm appears to be particularly well adapted to this task. This paper reports on the application of MapReduce, using its open source implementation Hadoop to develop a computational procedure for efficiently calculating edit distance. 
+
+The edit distance is usually computed by an elegant dynamic programming procedure \cite{edit-stanford}. Although, like the divide-and-conquer method, dynamic programming solves problems by combining the solutions to subproblems, it applies when the subproblems overlap - that is, when subproblems share subsubproblems \cite{Cormen}. Each subsubproblem is solved just once, and then the answer is saved, thereby avoiding the work of recomputing the answer every time it solves each subproblem. Unlike divide-and-conquer algorithms, dynamic programming procedures do not partition the problem into disjoint subproblems, therefore edit distance calculation does not lend itself naturally to parallel implementation. This paper develops an algorithm for calculating the edit distance for MapReduce framework and demonstrates the improvement in performance over the usual dynamic programming algorithm used in parallel.
+
+We implement the dynamic programming approach for this problem in a top-down way with memoization \cite{Cormen}. In this approach, we write the procedure recursively in a natural manner, but modified to save the result of each subproblem in an associative array. The procedure now first checks to see whether it has previously solved this subproblem. If so, it returns the saved value, saving further computation at this level; if not, the procedure computes the value in the usual manner \cite{Cormen}. Finding edit distance of a pair of strings ($s$, $t$) entails finding the edit distance of every pair ($s'$, $t'$), where $s'$ and $t'$ are substrings of $s$ and $t$ respectively. All these distances are saved in an associative array $h$. Subsequently, if any new pair of strings share a pair of substrings for which the distance is already stored in $h$, the saved values are used, thereby saving the computation time. Pairs of strings that are likely to share common substrings are processed together, thus improving the performance over the standard dynamic programming parallel application for this problem.
+
+The contributions of this work are as follows. First, to the best of our knowledge, this is the first work that addresses the calculation of unnormalized edit distance for a large number of string pairs in a parallel implementation. Our implementation in MapReduce improves upon the performance of usual dynamic programming implementation on a single machine. Second, our proposed approach, which uses an algorithm tailored to the MapReduce framework architecture performs better than the simple parallel implementation. Finally, this serves as an example of using the MapReduce framework for dynamic programming solutions, and paves the way for parallel implementation for other dynamic programming problems.
+
+The remainder of this paper is organized as follows. Section II discusses the problem statement and the dynamic programming solution to the problem on a single machine. Section III discusses our proposed approach, and the techniques used in detail. Section IV reports on the experimental setup and results. Section V then describes the related work, and Section VI concludes with directions to future work.
+
+\section{Background}
+The edit distance problem is to determine the smallest number of edit operations required for editing a source string of characters into a destination string. For any two strings $s$ = $s_1s_2....s_m$ and $t$ = $t_1t_2...t_n$ over an input alphabet of symbols $\sigma$ = \{$a_1, a_2,...a_r$\}, the valid operations to transform $s$ into $t$ are:
+\begin{itemize}
+\item Insert a character $t_j$ appearing in string $t$
+\item Delete a character $s_i$ appearing in string $s$
+\item Replace a character $s_i$ appearing in string $s$ by a character $t_j$ in string $t$
+\end{itemize}
+
+For strings $s$ = $s_1s_2....s_m$ and $t$ = $t_1t_2...t_n$, this problem can be solved sequentially in $O(mn)$ time. The memoized dynamic programming algorithm for this, MEM\_ED, is described below:
+
+\begin{algorithm}
+\caption{EDIT-DISTANCE($s[1,2,..m]$, $t[1,2,...,n]$, $h$): (\textbf{MEM\_ED})}
+\begin{algorithmic}[1]
+\If{pair($s$, $t$) in $h$}
+    \State \textbf{return} $h$[pair($s$, $t$)]
+\EndIf
+\If{len($s$)==0}
+    \State \textbf{return} $t$.length
+\EndIf
+\If{len($t$)==0}
+    \State \textbf{return} $s$.length
+\EndIf
+\State $s' \leftarrow s[1,2,...m-1]$
+\State $t' \leftarrow t[1,2,...n-1]$
+\State $k_a \leftarrow$ EDIT-DISTANCE$(s', t')$
+\State $k_b \leftarrow$ EDIT-DISTANCE$(s', t)$ + 1
+\State $k_c \leftarrow$ EDIT-DISTANCE$(s, t')$ + 1
+\If{s[m]==t[n]}
+    \State $k_d \leftarrow$ $k_a$
+\Else
+    \State $k_d \leftarrow$ $k_a$ + 1
+\EndIf
+\State $c \leftarrow min(k_b, k_c, k_d)$
+\State $h$[pair($s$, $t$)] $\leftarrow c$
+\State \textbf{return} $c$
+\end{algorithmic}
+\end{algorithm}
+
+For an input pair of strings $(s, t)$, step 1 in MEM\_ED algorithm checks whether the pair is already stored in the input associative array $h$. If present, the algorithm returns the stored value for $(s, t)$ in step 2. If one of the strings is empty, MEM\_ED returns the length of the other string as the output. Steps 10-11 in this algorithm divide the problem inputs into subproblem inputs of smaller size. Steps 12 - 14 calculate the edit distance recursively for these subproblems. Step 20 derives the edit distance for the problem, and step 21 stores this result in an associative array, $h$  for further use, thereby memoizing the recursive procedure. 
+
+Fig. \ref{fig:edit} shows the associative array entries for calculating the edit distance between two strings - `levenshtein' and `meilenstein'. For example, for calculating the edit distance between the string pair (`$levens$', `$meilens$'), the edit distances $k_a$, $k_b$ and $k_c$ for the pairs (`$leven$', `$meilen$'), (`$levens$', `$melen$') and (`$leven$', `$melens$') are considered respectively. By a recursive procedure in steps 12-14 of MEM\_ED, these values are calculated to be 3, 4 and 4 respectively. Since the input string pair (`$levens$', `$meilens$') have the same last character `$s$', the value $k_d$ is calculated to be equal to $k_a$ = 3 in steps 15-19 of MEM\_ED. Step 20 computes $c$, the minimum of $k_b$, $k_c$ and $k_d$ to be 3. Step 21 associates string pair (`$levens$', `$meilens$') with value 3 in the associative array $h$ for further use. Step 22 returns this edit distance value.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=80mm]{edit_distance.eps}
+\end{center}
+\caption{Edit Distance between two strings}
+\label{fig:edit}
+\end{figure}
+
+On a single machine, we compute the edit distance for every pair of distinct strings in an input text document by repeatedly using MEM\_ED for each pair of distinct strings. The SIN\_ED procedure below describes this approach. 
+
+\begin{algorithm}
+\caption{Single Machine Implementation for calculating Edit Distance for all string pairs (\textbf{SIN\_ED})}
+\begin{algorithmic}[1]
+\State $dist\_strings$ $\leftarrow$ list of distinct strings in doc d
+\For{all string pairs ($s$, $t$) $\epsilon$ $dist\_strings$}
+    \State $H$ $\leftarrow$ new ASSOCIATIVE\_ARRAY
+    \State $c$ $\leftarrow$ EDIT\_DISTANCE($s$, $t$, $H$)
+    \State EMIT(pair($s$, $t$), $c$)
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Step 1 in SIN\_ED algorithm collects all the distinct strings in the input document. Step 3 initializes an associative array. Step 4 uses the EDIT\_DISTANCE procedure of MEM\_ED to calculate the edit distance for each distinct string pair. The implementation of SIN\_ED takes $O(t^2n^2)$ time for $t$ distinct strings and string length of order $n$. This is computationally very expensive; hence we need to implement this algorithm in parallel for faster computations.
+
+\section{Proposed Approach}
+We discussed in the last section that the single machine implementation for calculating the edit distance of all distinct pairs of strings, described in SIN\_ED, is computationally expensive. We propose a parallel computing approach to do this more efficiently.
+
+MapReduce is emerging as an important programming model for expressing distributed computations in data-intensive applications \cite{incmr}. It was originally proposed by Google and is built on well-known principles in parallel and distributed processing dating back several decades. MapReduce has since enjoyed widespread adoption via Hadoop, a popular open-source implementation developed primarily by Yahoo and Apache. It enables easy development of scalable approaches to efficiently processing massive amounts of data on clusters of commodity machines. MapReduce systems are evolving and extending rapidly and today, Hadoop is a core part of the computing infrastructure for many web companies, such as Facebook, Amazon, Yahoo and Linkedin. Because of its high efficiency, high scalability, and high reliability, MapReduce framework is used in many fields \cite{incmr}, such as life science computing \cite{lifescience}, text processing, web searching, graph processing \cite{graph}, relational data processing, data mining, machine learning \cite{svm} and video analysis \cite{video}.
+
+We use the MapReduce framework for the parallel implementation of calculating edit distance for a large set of strings. The idea is to use the associative array in SIN\_ED to store the edit distances across the computations for many pairs of strings. Once the edit distance for a pair of strings $(s, t)$ is calculated, the edit distance for all pairs $(s', t')$, where $s'$ and $t'$ are substrings of $s$ and $t$ respectively are stored in the associative array. Subsequent to this, for a new pair of strings $(a, b)$, the calculations at steps 12, 13 and/or 14 in MEM\_ED can be saved, if the input pairs of strings for these steps already have an entry in the associative array.
+
+The SIM\_MR algorithm below describes a simple Map Reduce approach to calculating edit distance in parallel using these ideas.
+
+\begin{algorithm}
+\caption{Simple MapReduce approach to calculating Edit Distance for all string pairs (\textbf{SIM\_MR})}
+\begin{algorithmic}[1]
+\class MAPPER
+    \method MAP(docid $a$, doc $d$)
+        \State $dist\_strings$ $\leftarrow$ list of distinct strings in doc d
+        \State $count$ $\leftarrow$ 0
+        \For{all string pairs ($s$, $t$) $\epsilon$ $dist\_strings$}
+            \State $count$ $\leftarrow$ $count + 1$
+            \State $reducer\_index$ $\leftarrow$ $count$ \% \textit{num\_reducers}
+            \State EMIT($reducer\_index$, pair($s$, $t$))
+        \EndFor
+    \endmethod
+\endclass\\
+
+\class REDUCER
+    \method REDUCE($reducer\_index$, pairs [($s_1$, $t_1$), ($s_2$, $t_2$),...])
+        \State $H$ $\leftarrow$ new ASSOCIATIVE\_ARRAY
+        \For{all string pairs ($s$, $t$) $\epsilon$ pairs [($s_1$, $t_1$), ($s_2$, $t_2$),...]}
+            \State $c$ $\leftarrow$ EDIT\_DISTANCE($s$, $t$, $H$)
+            \State EMIT(pair($s$, $t$), $c$)
+        \EndFor
+    \endmethod
+\endclass
+
+\end{algorithmic}
+\end{algorithm}
+
+SIM\_MR first constructs a list of distinct strings from the input document in Step 3 in the Mapper phase. The $`count'$ variable initialized in Step 4 tracks the count of the string pair being processed. The `$num\_reducers$' parameter determines the number of reducers to be used in the reduce phase of the procedure. The $`reducer\_index'$ variable determines the reducer that would process the current string pair. The value of $`reducer\_index'$ is calculated in Step 7. This value is independent of the strings in the string pair being processed. Step 8 emits with $'reducer\_index'$ as the key and the current string pair as the value.
+
+In the reduce phase, an associative array, $H$ is initialized in Step 13. For every input string pair, Step 15 calculates the edit distance of the current string pair using $H$ with the EDIT\_DISTANCE procedure of MEM\_ED. The entries stored in $H$ during the edit distance calculations of any string pair can be used across calculations for different string pairs. Step 16 emits the string pair with its corresponding edit distance value.
+
+We note that the $reducer\_index$ value in SIM\_MR depends just on the count of the string pair being processed. We propose a modified algorithm that uses the strings in the string pair to effect a more efficient way of determining the reducer where the current string pair gets processed. 
+
+The pairs of strings to be processed at a single node need to be chosen such that they are likely to have some pairs of substrings for which the edit distance has already been computed, and the computation time is saved via an associative array look-up. To accomplish this, we collect all pairs of strings with a common prefix pair at a single reducer node. This prefix pair is constructed by taking the first $prefix\_length$ characters of both strings to form a string pair. The algorithm for the proposed approach, PRE\_MR, is described below. 
+
+\begin{algorithm}
+\caption{Prefixed MapReduce approach to calculating Edit Distance for all string pairs (\textbf{PRE\_MR})}
+\begin{algorithmic}[1]
+\class MAPPER
+    \method MAP(docid $a$, doc $d$)
+        \State $dist\_strings$ $\leftarrow$ list of distinct strings in doc d
+        \For{all string pairs ($s$, $t$) $\epsilon$ $dist\_strings$}
+            \State $s\_prefix$ $\leftarrow$ $s[1: prefix\_length]$
+            \State $t\_prefix$ $\leftarrow$ $t[1: prefix\_length]$
+            \State EMIT(pair($s\_prefix$, $t\_prefix$), pair($s$, $t$))
+        \EndFor
+    \endmethod
+\endclass\\
+
+\class REDUCER
+    \method REDUCE(prefix\_pair ($s'$, $t'$), pairs [($s_1$, $t_1$), ($s_2$, $t_2$),...])
+        \State $H$ $\leftarrow$ new ASSOCIATIVE\_ARRAY
+        \For{all string pairs ($s$, $t$) $\epsilon$ pairs [($s_1$, $t_1$), ($s_2$, $t_2$),...]}
+            \State $c$ $\leftarrow$ EDIT\_DISTANCE($s$, $t$, $H$)
+            \State EMIT(pair($s$, $t$), $c$)
+        \EndFor
+    \endmethod
+\endclass
+
+\end{algorithmic}
+\end{algorithm}
+
+For the current string pair $(s, t)$, Steps 5 and 6 in PRE\_MR calculate the $s\_prefix$ and $t\_prefix$ values by taking the first $prefix\_length$ characters from $s$ and $t$ respectively. For example, for $prefix\_length$ = 2, and string pair $(s, t)$ = (`mango', `gate'), the $s\_prefix$ and $t\_prefix$ values are computed to be `ma' and `ga' respectively. Step 7 emits with the string pair ($s\_prefix$, $t\_prefix$) as the key, and the string pair ($s$, $t$) as the value.
+
+The reduce phase for PRE\_MR is similar to the reduce phase in the SIM\_MR procedure. An associative array $H$ is initialized in step 12, and the edit distance of every string pair in pairs [($s_1$, $t_1$), ($s_2$, $t_2$),...] is computed using the EDIT\_DISTANCE procedure of MEM\_ED. Step 15 emits the results.
+
+\begin{figure*}[htbp]
+\begin{center}
+\setlength\fboxsep{0pt}
+\setlength\fboxrule{0.25pt}
+\fbox{\includegraphics[width=180mm, height=130mm]{pre_mr_flow.eps}}
+\end{center}
+\caption{PRE\_MR algorithm flow-chart}
+\label{fig:pre_mr_flow}
+\end{figure*}
+
+Hadoop runs its map and reduce processes in such a way that these processes operate on independent chunks of data and have no inter process communication. We've customized our algorithms to satisfy this constraint. For PRE\_MR, the mapper sends all string pairs sharing the same pair of prefixes to a single reducer. In the reduce stage, all these string pairs are processed together. For each string pair, the associative array $H$ saves the calculated intermediate edit distances, and a look-up in this array often saves the computations for many other pairs of strings that are input to this reducer. These savings in computations make our algorithms, especially PRE\_MR more efficient than the SIN\_ED approach.
+
+Fig. \ref{fig:pre_mr_flow} shows an example of the implementation for PRE\_MR algorithm with `$prefix\_length$' = 2. Mapper constructs a prefix pair (`ma', `la') for input pair of strings (`mad', `laughter'), and emit with (`ma', `la') as the key and (`mad', `laughter') as the value. In the reduce phase, all strings pairs sharing the prefix (`ma', `la') are processed together. Therefore, the string pairs (`mad', `laughter') and (`madness', `laugh') are processed at the same node. Since these string pairs share common substrings, many computations are saved, and the procedure is faster.
+
+\section{Experimental Setup and Results}
+Our hadoop cluster (cshadoop0-cshadoop9) has ten virtual machines that run in the Computer Science vmware esx cloud. Each of these VM's has 4 GB of RAM and a 256 GB virtual hard drive. These VM's are spread across three ESX hosts to balance the load. We've used one name node and nine slave nodes. For our implementation, we used Hadoop version $1.0.4$ and JAVA JDK version $1.6.0.37$.
+
+The data sets were created from the ebooks for which the copyright has expired. We used the text of `pride and prejudice' available at http://www.gutenberg.org/ebooks/1342, and developed files of size 10kB, 20kB,..., 100kB from it.
+
+We processed each of these files using SIN\_ED, SIM\_MR and PRE\_MR algorithms. The results are described in Table \ref{table:sin_vs_mr} and Fig. \ref{fig:sin_vs_mr}. For Fig. \ref{fig:sin_vs_mr}, we've taken the input file sizes (in kB) on the x-axis and the times taken by each of the procedures (in seconds) on the y-axis.
+
+\begin{table}[htbp]
+\caption{SIN\_ED vs. SIM\_MR vs. PRE\_MR implementation}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{SIN\_ED} & \textbf{SIM\_MR} & \textbf{PRE\_MR} \\
+\hline\hline
+10 kB & 12 sec & 72 sec & 68 sec \\
+\hline
+20 kB & 33 sec & 73 sec & 70 sec \\
+\hline
+30 kB & 62 sec & 82 sec & 71 sec \\
+\hline
+40 kB & 90 sec & 94 sec & 76 sec \\
+\hline
+50 kB & 122 sec & 147 sec & 79 sec \\
+\hline
+60 kB & 155 sec & 120 sec & 80 sec \\
+\hline
+70 kB & 189 sec & 125 sec & 85 sec \\
+\hline
+80 kB & 218 sec & 140 sec & 88 sec \\
+\hline
+90 kB & 276 sec & 145 sec & 93 sec \\
+\hline
+100 kB & 293 sec & 209 sec & 101 sec \\
+\hline
+\end{tabular}
+\label{table:sin_vs_mr}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{sin_vs_mr.eps}
+\end{center}
+\caption{SIN\_ED vs. SIM\_MR vs. PRE\_MR implementation}
+\label{fig:sin_vs_mr}
+\end{figure}
+
+Table I results indicate that PRE\_MR algorithm gives the best results. For example, for a file of size 80 kB, SIN\_ED takes 218 sec, SIM\_MR takes 140 sec and PRE\_MR algorithm takes 88 sec. Therefore, we conduct the rest of the experiments only for PRE\_MR.
+
+We experimented with different values of the parameter $`prefix\_length'$ used in the MAP phase for the PRE\_MR implementation. The time taken for different file sizes are documented in Table \ref{table:mr_diff_pl}, and Fig. \ref{fig:mr_diff_pl}. For Fig. \ref{fig:mr_diff_pl}, the x-axis is file size (in kB), and the y-axis is the runtime for experiments with different `$prefix\_length$' values. For this experiment, we chose to use 2 mappers and 1 reducer in each case. We see that, generally, smaller `$prefix\_length$' values tend to give better performance. For example, for a file of size 80 kB, `$prefix\_length$' = 1 case takes 100 sec, `$prefix\_length$' = 2 case takes 113 sec, `$prefix\_length$' = 3 case takes 132 sec and `$prefix\_length$' = 4 case takes 150 sec.
+
+\begin{table}[h]
+\caption{PRE\_MR performance for different $prefix\_length$ values}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{\textit{prefix\_length}=1} & \textbf{\textit{prefix\_length}=2} & \textbf{\textit{prefix\_length}=3} & \textbf{\textit{prefix\_length}=4} \\
+\hline\hline
+10 kB & 67 sec & 69 sec & 65 sec & 66 sec \\
+\hline
+20 kB & 72 sec & 72 sec & 75 sec & 78  sec \\
+\hline
+30 kB & 77 sec & 79 sec & 82 sec & 87 sec \\
+\hline
+40 kB & 79 sec & 82 sec & 86 sec & 96 sec \\
+\hline
+50 kB & 90 sec & 90 sec & 102 sec & 112 sec \\
+\hline
+60 kB & 93 sec & 105 sec & 115 sec & 120 sec \\
+\hline
+70 kB & 94 sec & 108 sec & 116 sec & 134 sec \\
+\hline
+80 kB & 100 sec & 113 sec & 132 sec & 150 sec \\
+\hline
+90 kB & 106 sec & 121 sec & 158 sec & 155 sec \\
+\hline
+100 kB & 108 sec & 131 sec & 134 sec & 166 sec \\
+\hline
+\end{tabular}
+\label{table:mr_diff_pl}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{mr_diff_pl.eps}
+\end{center}
+\caption{PRE\_MR performance for different $prefix\_length$ values}
+\label{fig:mr_diff_pl}
+\end{figure}
+
+We also experimented with different number of reducers in the PRE\_MR implementation for three cases: `$prefix\_length$' = 1, `$prefix\_length$' = 2 and `$prefix\_length$' = 3. In each case, in the corresponding Fig., we take the file size as the x-axis and the runtime for the experiment as the y-axis.
+
+Table \ref{table:pl1} and Fig. \ref{fig:pl1} detail the times taken for this experiment when the `$prefix\_length$' parameter is set to 1. We see that the performance generally improves with increasing number of reduce nodes. For example, for a file of size 80 kB, 1 reducer node takes 100 sec, 2 reducers take 91 sec and 4 reducers take 88 sec.
+
+\begin{table}[htbp]
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=1}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{1 reducer} & \textbf{2 reducers} & \textbf{4 reducers}\\
+\hline\hline
+10 kB & 67 sec & 65 sec & 68 sec\\
+\hline
+20 kB & 72 sec & 68 sec & 70 sec \\
+\hline
+30 kB & 77 sec & 69 sec & 71 sec \\
+\hline
+40 kB & 79 sec & 75 sec & 76 sec \\
+\hline
+50 kB & 90 sec & 86 sec & 79 sec \\
+\hline
+60 kB & 93 sec & 95 sec & 80 sec \\
+\hline
+70 kB & 94 sec & 90 sec & 85 sec \\
+\hline
+80 kB & 100 sec & 91 sec & 88 sec \\
+\hline
+90 kB & 106 sec & 96 sec & 93 sec \\
+\hline
+100 kB & 108 sec & 112 sec & 101 sec  \\
+\hline
+\end{tabular}
+\label{table:pl1}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{prefix_length_1.eps}
+\end{center}
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=1}
+\label{fig:pl1}
+\end{figure}
+
+Table \ref{table:pl2} and Fig. \ref{fig:pl2} describe the times taken when the `$prefix\_length$' parameter in PRE\_MR is set to 2. For example, for a file of size 90 kB, 1 reducer node takes 121 sec, 2 reducers take 117 sec, and 4 reducers take 102 sec.
+
+\begin{table}[htbp]
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=2}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{1 reducer} & \textbf{2 reducers} & \textbf{4 reducers}\\
+\hline\hline
+10 kB & 69 sec & 63 sec & 67 sec\\
+\hline
+20 kB & 72 sec & 66 sec &  71 sec \\
+\hline
+30 kB & 79 sec & 72 sec & 73 sec \\
+\hline
+40 kB & 82 sec & 76 sec & 82 sec \\
+\hline
+50 kB & 90 sec & 81 sec & 78 sec \\
+\hline
+60 kB & 105 sec & 91  sec & 90 sec \\
+\hline
+70 kB & 108 sec & 98  sec & 89 sec \\
+\hline
+80 kB & 113 sec & 97 sec & 97 sec \\
+\hline
+90 kB & 121 sec & 117  sec & 102 sec \\
+\hline
+100 kB & 131 sec & 111 sec & 101 sec  \\
+\hline
+\end{tabular}
+\label{table:pl2}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{prefix_length_2.eps}
+\end{center}
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=2}
+\label{fig:pl2}
+\end{figure}
+
+Table \ref{table:pl3} and Fig. \ref{fig:pl3} list the times taken for PRE\_MR when the `prefix\_length' parameter is set to 3. Again, increasing the number of nodes in reduce phase tend to improve the performance. For example, for a file of size 80 kB, 1 reducer case takes 132 sec, 2 reducers take 124 sec and 4 reducers take 108 sec.
+
+\begin{table}[htbp]
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=3}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{1 reducer} & \textbf{2 reducers} & \textbf{4 reducers}\\
+\hline\hline
+10 kB & 65 sec & 67 sec & 67 sec\\
+\hline
+20 kB & 75 sec & 73 sec & 77 sec \\
+\hline
+30 kB & 82 sec & 77 sec & 82 sec \\
+\hline
+40 kB & 86 sec & 84 sec & 104 sec \\
+\hline
+50 kB & 102 sec & 94 sec & 95 sec \\
+\hline
+60 kB & 115 sec & 93 sec & 92 sec \\
+\hline
+70 kB & 116 sec & 99 sec & 114 sec \\
+\hline
+80 kB & 132 sec & 124 sec & 108 sec \\
+\hline
+90 kB & 158 sec &  127 sec & 98 sec \\
+\hline
+100 kB & 134 sec & 115 sec & 122 sec  \\
+\hline
+\end{tabular}
+\label{table:pl3}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{prefix_length_3.eps}
+\end{center}
+\caption{PRE\_MR performance for different number of reducers, $prefix\_length$=3}
+\label{fig:pl3}
+\end{figure}
+
+Table \ref{table:map} and Fig. \ref{fig:map} describe the times taken for different number of mappers for PRE\_MR with $prefix\_length$ set to 1 and 4 reducers. In Fig. \ref{fig:map}, the x-axis labels the size of the input file, and the runtime for the experiment are on the y-axis. As expected, with increase in the number of mapper nodes, the performance tends to improve. For example, for a file of size 80 kB, 2 mappers take 88 sec, 4 mappers take 85 sec and 8 mappers take 82 sec.
+
+\begin{table}[htbp]
+\caption{PRE\_MR performance for different number of mappers, $prefix\_length$=1, number of reducers=4}
+\centering
+\vspace{5pt}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{File Size} & \textbf{2 mappers} & \textbf{4 mappers} & \textbf{8 mappers}\\
+\hline\hline
+10 kB & 68 sec & 67 sec & 66 sec\\
+\hline
+20 kB & 70 sec & 67 sec & 67 sec\\
+\hline
+30 kB & 71 sec & 69 sec & 67 sec\\
+\hline
+40 kB & 76 sec & 75 sec & 76 sec\\
+\hline
+50 kB & 79 sec & 73 sec & 74 sec\\
+\hline
+60 kB & 80 sec & 84 sec & 78 sec\\
+\hline
+70 kB & 85 sec & 84 sec & 82 sec\\
+\hline
+80 kB & 88 sec & 85 sec & 82 sec\\
+\hline
+90 kB & 93 sec & 91 sec & 90 sec\\
+\hline
+100 kB & 101 sec & 101 sec & 90 sec \\
+\hline
+\end{tabular}
+\label{table:map}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=80mm, height=60mm]{map.eps}
+\end{center}
+\caption{PRE\_MR performance for different number of mappers}
+\label{fig:map}
+\end{figure}
+
+
+\section{Related Work}
+Extensive studies have been done on edit distance calculations and related problems over the past several years. Ristad and Yianilos \cite{Ristad} provide a stochastic model for learning string edit distance. This model allows for learning a string edit distance function from a corpus of examples. Bar-yossef, Jayram, Krauthgamer and Kumar develop algorithms that solve gap versions of the edit distance problem \cite{Yossef}: given two strings of length $n$ with the promise that their edit distance is either at most $k$ or greater than $l$, these algorithms decide which of the two holds.
+
+A lot of studies have been dedicated to normalized edit distance to effect a more reasonable distance measure.  Abdullah N. Arslan and \"{O}mer Egecioglu discuss a model for computing the similarity of two strings X and Y of lengths m and n respectively where X is transformed into Y through a sequence of three types of edit operations: insertion, deletion, and substitution. The model assumes a given cost function which assigns a non-negative real weight to each edit operation. The amortized weight for a given edit sequence is the ratio of its weight to its length, and the minimum of this ratio over all edit sequences is the normalized edit distance. Arslan and Egecioglu \cite{Arslan} give an  O(mn logn)-time algorithm for the problem of normalized edit distance computation when the cost function is uniform, i.e, the weight of each edit operation is constant within the same type, except substitutions which can have different weights depending on whether they are matching or non-matching. 
+
+Jie Wei proposes a new edit distance called Markov edit distance \cite{Wei} within the dynamic programming framework, that takes full advantage of the local statistical dependencies in the string/pattern in order to arrive at enhanced matching performance. Higuera and Mic\'{o} define a new contextual normalized distance, where each edit operation is divided by the length of the string on which the edit operation takes place. They prove that this contextual edit distance is a metric and that it can be computed through an extension of the usual dynamic programming algorithm for the edit distance \cite{Higuera}.  
+
+Fuad and Marteau propose an extension to the edit distance to improve the effectiveness of similarity search \cite{Fuad}. They test this proposed distance on time series data bases in classification task experiments and prove, mathematically, that this new distance is a metric.
+
+Robles-Kelly and Hancock compute graph edit distance by converting graphs to string sequences, and using string matching techniques on them \cite{Kelly}. They demonstrate the utility of the edit distance on a number of graph clustering problems. Bunke introduces a particular cost function for graph edit distance and shows that under this cost function, graph edit distance computation is equivalent to the maximum common subgraph problem \cite{Bunke}. 
+
+Hanada, Nakamura and Kudo discuss the issue of high computational cost of calculating edit distance of a large set of strings \cite{Hanada}. They contend that a potential solution for this problem is to approximate the edit distance with low computational cost. They list the edit distance approximation methods, and use the results of experiments implementing these methods to compare them. Jain and Rao present a comparative study to evaluate experimental results for approximate string matching algorithms such as Knuth-Morris-Pratt, Boyer-Moore and Raita on the basis of edit distance \cite{Shivani}.
+
+\section{Conclusions and Future Work}
+Although there are several efficient algorithms for calculating edit distance and related problems, computing edit distance for a large set of strings is expensive. We propose an efficient parallel implementation for this, using MapReduce. With support from our experimental results of Section IV, we argue that our approach is much more efficient than the usual dynamic programming method. We can also tune the $`prefix\_length'$ parameter in PRE\_MR, and the number of nodes used in the map phase and reduce phase to improve the performance of our algorithms for varying input file sizes. 
+
+The field of dynamic programming problems is far from exhausted when it concerns creating scalable, effective, parallel algorithms. We argue, however, that our algorithms are a step in the right direction. Future research includes further testing to explore their efficiency in different datasets. In addition, further analysis of dynamic programming algorithms can lead to more effective MapReduce solutions, especially for problems that require ad-hoc data analysis.
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+The research for this work has been supported by The Air Force Office of Scientific Research. The authors would also like to thank the University of Texas at Dallas Database \& Data Mining Laboratory for its support. 
+
+\begin{thebibliography}{1}
+
+\bibitem{edit-stanford}
+http://nlp.stanford.edu/IR-book/html/htmledition/edit-distance-1.html
+
+\bibitem{algo-1}
+R. A. Wagner and M. J. Fischer, \textit{The string-to-string correction problem}, J. Assoc. Comput. Machinery, vol. 21, no. 1, pp. 168-173,
+Jan. 1974.
+
+\bibitem{algo-2}
+D. Sankoff and J. B. Kruskal, Time Warps, String Edits, and Macro-molecules: \textit{The Theory and Practice of Sequence Comparison}. Read-
+ing, MA: Addison-Wesley, 1983.
+
+\bibitem{algo-3}
+W. J. Masek and M. S. Patterson, \textit{A faster algorithm computing string edit distances,} J. Comput. Syst. Sci., vol. 20, pp. 18-31, Feb. 1980.
+
+\bibitem{algo-4}
+P.A.V. Hall and G.R. Dowling, \textit{Approximate string matching}, ACM Comput. Surveys, vol. 12, pp. 381-402, Dec. 1980.
+
+\bibitem{algo-5}
+P. H. Sellers, \textit{The theory and computation of evolutionary distances: Pattern recognition,} J. Algorithms, vol. 1, pp. 359-373, 1980.
+
+\bibitem{algo-6}
+Y. P. Yang and T. Pavlidis, \textit{Optimal correspondence of string subsequences,} IEEE Trans. Patt. Anal. Machine Intell., vol. 12, no. 11, pp.1080-1087. Nov. 1990.
+
+\bibitem{appl-1}
+K. S . Fu, \textit{Syntactic Pattern Recognition and Applications}. Englewood Cliffs, NJ: Prentice-Hall, 1982.
+
+\bibitem{Andres}
+Andres Marzal and Enrique Vidal: \textit{Computation of Normalized Edit Distance and Applications}.
+
+\bibitem{Gaggero}
+Massimo Gaggero, Simone Leo, Simone Manca, Federico Santoni, Omar Schiaratura, Gianluigi Zanetti: \textit{Parallelizing bioinformatics applications with MapReduce}
+
+\bibitem{Cormen}
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein: \textit{Introduction to Algorithms}
+
+\bibitem{Kruskal}
+David Sankoff and Joseph B. Kruskal. \textit{Time Warps, String Edits, and Macromolecules: the Theory and Practice of Sequence Comparison.} Addison-Wesley Publishing Company, Inc., 1983. 
+
+
+\bibitem{}
+http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/
+
+\bibitem{}
+http://mootools.net/forge/p/string\_levenshtein
+
+\bibitem{Ristad}
+Eric Sven Ristad and Peter N. Yianilos. \textit{Learning String Edit Distance}.
+
+\bibitem{Yossef}
+Ziv Bar-yossef , T. S. Jayram , Robert Krauthgamer and Ravi Kumar. \textit{Approximating edit distance efficiently}.
+
+\bibitem{Wei}
+Wei J. \textit{Markov Edit Distance}.
+
+\bibitem{Arslan}
+Abdullah N. Arslan and \"{O}mer Egecioglu. \textit{An efficient uniform-cost normalized edit distance algorithm}
+
+\bibitem{Fuad}
+Muhammad Marwan Muhammad Fuad and Pierre-Fran\c{c}ois Marteau. \textit{The Extended Edit Distance Metric}.
+
+\bibitem{Higuera}
+Colin de la Higuera and Luisa Mic\'{o}. \textit{A Contextual Normalised Edit Distance}
+
+\bibitem{Bunke}
+H. Bunke. \textit{On a Relation between Graph Edit Distance and Maximum Common Subgraph}. Pattern Recognition Letters, vol. 18, no. 8, pp. 689-694, 1997.
+
+\bibitem{Hanada}
+Hiroyuki Hanada, Atsuyoshi Nakamura and Mineichi Kudo. \textit{A practical comparison of edit distance approximation algorithms}. Granular Computing (GrC), page 231-236. IEEE, (2011)
+
+\bibitem{Shivani}
+Shivani Jain and A.L.N. Rao. \textit{A Comparative Performance Analysis of Approximate String Matching}.
+
+\bibitem{Kelly}
+Antonio Robles-Kelly and Edwin R. Hancock. \textit{Graph Edit Distance from Spectral Seriation}.
+
+\bibitem{latifur_cloudcom}
+Husain, M.~F., P.~Doshi, L.~Khan, and B.~Thuraisingham (2009). \\
+\textit{Storage and retrieval of large rdf graph using hadoop and mapreduce}. \\
+\textit{Proceedings of the 1st International Conference on Cloud Computing}, CloudCom '09, Berlin, Heidelberg, pp.\  680--686.  Springer-Verlag.
+
+\bibitem{latifur_ieeecloud}
+Husain, M.~F., L.~Khan, M.~Kantarcioglu, and B.~Thuraisingham (2010). \\
+\textit{Data intensive query processing for large rdf graphs using cloud computing tools}. \\
+\textit{Proceedings of the 2010 IEEE 3rd International Conference on Cloud Computing},  CLOUD '10, Washington, DC, USA, pp.\  1--10. IEEE Computer Society.
+
+\bibitem{latifur_tkde}
+Husain, M.~F., J.~P. McGlothlin, M.~M. Masud, L.~R. Khan, and B.~M. Thuraisingham (2011).\\
+\textit{Heuristics-based query processing for large rdf graphs using cloud computing}.\\
+\textit{IEEE Trans. Knowl. Data Eng.\/}~\textit{23\/}(9), 1312--1327.
+
+\bibitem{ParveenTK}
+Parveen, P., B.~Thuraisingham, and L.~Khan (2013b, October).\\
+\textit{Map reduce guided scalable compressed dictionary construction for repetitive sequences.}\\
+\textit{IEEE International Conference on Collaborative Computing: Networking, Applications and Worksharing}
+
+\bibitem{pallabi2013a}
+Parveen, P., N.~McDaniel, J.~Evans, B.~Thuraisingham, K.~W. Hamlen, and L.~Khan (2013, October).\\
+\textit{Evolving insider threat detection stream mining perspective.}\\
+{\em International Journal on Artificial Intelligence Tools (World Scientific Publishing)\/}~{\em 22\/}(5), 1360013--1--1360013--24.
+
+\bibitem{incmr}
+Cairong Yan, Xin Yang, Ze Yu, Min Li and Xiaolin Li. \textit{IncMR: Incremental Data Processing based on MapReduce.}
+
+\bibitem{dyer}
+Jimmy Lin and Chris Dyer. \textit{Data-Intensive Text Processing with MapReduce}
+
+\bibitem{lifescience}
+J. Ekanakake, H. Li, B. Zhang, T. Gunarathne, S. Bae, J. Qiu, and G. Fox. \textit{Twister: a runtime for iterative mapreduce,} in 19th ACM International Symposium on High Performance Distributed Computing
+(HPDC), 2010
+
+\bibitem{video}
+R. Pereira, M. Azambuja, K. Breitman, and M. Endler, \textit{An architecture for distributed high performance video processing in the cloud,} in 3rd International Conference on Cloud computing (Cloud), 2010
+
+\bibitem{graph}
+G. Malewicz, M. Austern, A. Bik, J. Dehnert, I. Horn, N. Leiser, and C. G., \textit{Pregel: a system for large-scale graph processing,} in International Conference on Management of data (SIGMOD), 2010
+
+\bibitem{svm}
+Q. He, C. Du, Q. Wang, F. Zhuang, and Z. Shi, \textit{A parallel incremental extreme svm classifier}, Neurocomputing, vol. 74, no. 16, pp. 2532–2540, 2011.
+
+\end{thebibliography}
+
+
+
+% that's all folks
+\end{document}
+
+

@@ -1,0 +1,91 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx} % Required to insert images
+\usepackage{caption}
+\newcommand{\Break}{\State \textbf{break} }
+\algblockdefx[class]{class}{endclass}[1][]{\textbf{class} #1}{\textbf{End class}}
+\algtext*{endclass}
+\algblockdefx[method]{method}{endmethod}[1][]{\textbf{method} #1}{\textbf{End method}}
+\algtext*{endmethod}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Comparative analysis of classifiers identifying politeness markings and application in web-logs}
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Shagun Jhaver}
+\IEEEauthorblockA{Dept. of Computer Science\\
+The University of Texas at Dallas \\
+Richardson, Texas 75080\\
+Email: sxj124330@utdallas.edu}
+%\IEEEauthorblockN{Dr. Latifur Khan}
+%\IEEEauthorblockA{Dept. of Computer Science\\
+%The University of Texas at Dallas \\
+%Richardson, Texas 75080\\
+%Email: lkhan@utdallas.edu}
+}
+
+
+
+
+% make the title area
+\maketitle
+\thispagestyle{plain}
+\pagestyle{plain}
+
+
+%\begin{abstract}
+%\end{abstract}
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+\section{Introduction}
+Politeness, deference and tact have a sociological significance altogether beyond the level of table manners and etiquette books (Goffman 1971:90). Politeness, introduced into linguistics more than forty years ago, has emerged as a vital and rapidly developing area of study. Brown and Levinson's (1978, 1987) classic treatment of linguistic politeness show that politeness strategies are a basis for social order. The concepts inherent to their model have been invoked in much subsequent literature which has focused on linguistic carriers of politeness (e.g., speech acts, syntactic constructions, lexical items, etc.), seeking to quantify them, to compare them across cultures and genders, and to identify universals \cite{Meier}.
+
+Danescu-Niculescu-Mizil, Sudhof, Jurafsky, Leskovec and Potts \cite{Jurafsky} develop a computational framework for identifying and characterizing the linguistic aspects of politeness. Their investigation is guided by a new corpus of requests annotated for politeness, that they constructed and released. This corpus consists of a large collection of requests from two different sources - Wikipedia and Stack Exchange. Both of these are large online communities in which users frequently make requests of other members. 
+
+In this paper, we use this richly labeled data for politeness to construct politeness classifiers using different supervised and unsupervised machine learning algorithms, and present a comparative analysis of the performance of these classifiers. We also study the improvement in classifiers' performance after they use a wide range of lexical, sentiment and dependency features operationalizing key components of politeness theory. 
+
+We observe that some of our classifiers achieve near human-level accuracy across different test-sets, which demonstrates the consistent nature of politeness strategies, and we use these classifiers with new data for further analysis of the relation of politeness to social factors. We select the web-log (blog) entries from blogs focused at different interest groups, assign these entries a politeness score on a scale of 0 to 1 using our classifiers, and compare these scores. 
+
+\section{Background}
+
+
+\section{Proposed Approach}
+
+
+\section{Experimental Setup and Results}
+
+
+\section{Related Work}
+
+\section{Conclusions and Future Work}
+
+
+
+\begin{thebibliography}{1}
+
+\bibitem{Meier}
+A. J. Meier. \textit{Defining Politeness: Universality in Appropriateness}
+
+\bibitem{Jurafsky}
+Cristian Danescu-Niculescu-Mizil, Moritz Sudhof, Dan Jurafsky, Jure Leskovec and Christopher Potts. \textit{A computational approach to politeness with application to social factors}.
+
+\end{thebibliography}
+
+
+
+% that's all folks
+\end{document}
+
+
