@@ -19,6 +19,7 @@
 % can use linebreaks \\ within to get better formatting as desired
 \title{Comparative analysis of classifiers identifying politeness markings and application in web-logs}
 
+
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
@@ -27,11 +28,6 @@
 The University of Texas at Dallas \\
 Richardson, Texas 75080\\
 Email: sxj124330@utdallas.edu}
-%\IEEEauthorblockN{Dr. Latifur Khan}
-%\IEEEauthorblockA{Dept. of Computer Science\\
-%The University of Texas at Dallas \\
-%Richardson, Texas 75080\\
-%Email: lkhan@utdallas.edu}
 }
 
 
@@ -43,8 +39,12 @@ Email: sxj124330@utdallas.edu}
 \pagestyle{plain}
 
 
-%\begin{abstract}
-%\end{abstract}
+\begin{abstract}
+%\boldmath
+Given two strings $X$ and $Y$ over a finite alphabet, the edit distance between $X$ and $Y$, $d(X, Y)$ is the number of elimentary edit operations required to edit $X$ into $Y$. A dynamic programming algorithm elegantly computes this distance. In this paper, we investigate the parallelization of calculating edit distance for a large set of strings using MapReduce, a popular parallel computing framework. We propose SIM\_MR and PRE\_MR algorithms, parallel versions of the dynamic programming solution, and present implementations of these algorithms
+
+Index Terms - Politeness Theory, Classification, SVM
+\end{abstract}
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
@@ -58,20 +58,62 @@ In this paper, we use this richly labeled data for politeness to construct polit
 
 We observe that some of our classifiers achieve near human-level accuracy across different test-sets, which demonstrates the consistent nature of politeness strategies, and we use these classifiers with new data for further analysis of the relation of politeness to social factors. We select the web-log (blog) entries from blogs focused at different interest groups, assign these entries a politeness score on a scale of 0 to 1 using our classifiers, and compare these scores. 
 
-\section{Background}
 
+\section{Background}
+The meaning of politeness and concomitant concepts, and the claims for universals have shown considerable divergence and lack of clarity as they have received increased attention since Brown and Lewinson's proposed framework \cite{Meier}, \cite{Brown1}, \cite{Brown2}. Scholars use a variety of approaches to an account of politeness: the social-norm view, the conversational-maxim view; the face-saving view; and the conversational-contract view \cite{Fraser}. While none of these views is considered adequate, the face-saving view by Brown and Levinson is seen as the most clearly articulated and is the most popular.
+
+Brown and Levinson contend that linguistic politeness must be communicated, that it constitutes a message. They assert that the failure to communicate the intention to be polite may be taken as absence of the required polite attitude. They propose a framework to explain politeness in which their rational Model Person has `face', the individual's self-esteem. This face is a culturally elborated public self-image that every member of a society wants to claim for himself \cite{Fraser}. They characterize two types of face in terms of participant wants rather than social norms:
+
+Negative Face:
+``the want of every `competent adult member' that his action be unimpeded by others" 
+
+Positive Face:
+``the want of every member that his wants be desirable to at least some others"
+
+The organizing principle for their politeness theory is the idea that ``some acts are intrinsically threatening to face and thus require softening ..." To this end, each group of language users develops politeness principles from which they derive certain linguistic strategies. It is by the use of these so-called politeness strategies that speakers succeed in communicating both their primary message(s) as well as their intention to be polite in doing so. And in doing so, they reduce the face loss that results from the interaction. 
+
+The choice of a specific linguistic form is to be viewed as a specific realization of one of the politeness strategies in light of the speaker's assessment of the utterance context. Brown and Levinson outline four main types of politeness strategies: bald on-record, negative politeness, positive politeness, and off-record (indirect). The speaker must choose a linguistic means that will satisfy the strategic end. Since each strategy embraces a range of degrees of politeness, the speaker will be required to consider the specific linguistic forms used and their overall effect when used in conjunction with one another.
+
+We try to identify such strategies and use them to construct our classifiers. A brief description of the classifiers we used is given below.
+
+1) \textit{Naive Bayes}: Naive Bayes is a highly practical learning method whose performance is shown to be comparable to that of neural network and decision tree learning in some domains. It applies to the learning tasks where each instance $x$ is described by a conjunction of attribute values and where the target function $f(x)$ can take on any value from some finite set $V$. A set of training examples of the target function is provided, and a new instance is presented, described by the tuple of attribute values $\textless a_l, a_2,..., a_n\textgreater$. The learner is asked to predict the target value, or classification, for this new instance. The Bayesian approach to classifying the new instance is to assign the most probable target value, $V_{MAP}$, given the attribute values $\textless a_l, a_2,..., a_n\textgreater$ that describe the instance \cite{Mitchell}. 
+
+The naive Bayes classifier is based on the simplifying assumption that the attribute values are conditionally independent given the target value. In other words, the assumption is that given the target value of the instance, the probability of observing the conjunction $a_l, a_2,..., a_n$ is just the product of the probabilities for the individual attributes.
+
+2) \textit{Naive Bayes Multinomial}: In the multinomial model, a document is an ordered sequence of word events, drawn from the same vocabulary V. We assume that the lengths of documents are independent of class. We again make a similar naive Bayes assumption: that the probability of each word event in a document is independent of the word’s context and position in the document. Thus, each document $d_i$ is drawn from a multinomial distribution of words with as many independent trials as the length of $d_i$. This yields the familiar ``bag of words" representation for documents \cite{Nigam}. Whereas simple naive Bayes would model a document as the presence and absence of particular words, multinomial naive bayes explicitly models the word counts and adjusts the underlying calculations to deal with in. 
+
+3) \textit{J48}: J48 is an open source Java implementation of the C4.5 algorithm in the weka data mining tool. C4.5 is an algorithm used to generate a decision tree developed by Ross Quinlan. C4.5 is an extension of Quinlan's earlier ID3 algorithm. The decision trees generated by C4.5 can be used for classification, and for this reason, C4.5 is often referred to as a statistical classifier. At each node of the tree, C4.5 chooses the attribute of the data that most effectively splits its set of samples into subsets enriched in one class or the other. The splitting criterion is the normalized information gain (difference in entropy). The attribute with the highest normalized information gain is chosen to make the decision. The C4.5 algorithm then recurses on the smaller sublists \cite{j48}.
+
+4) \textit{Random Forest}: Random Forests grows many classification trees. To classify a new object from an input vector, put the input vector down each of the trees in the forest. Each tree gives a classification, and we say the tree "votes" for that class. The forest chooses the classification having the most votes (over all the trees in the forest).
+
+Each tree is grown as follows:
+
+\begin{enumerate}
+\item If the number of cases in the training set is N, sample N cases at random - but with replacement, from the original data. This sample will be the training set for growing the tree.
+\item If there are M input variables, a number m$<<$M is specified such that at each node, m variables are selected at random out of the M and the best split on these m is used to split the node. The value of m is held constant during the forest growing.
+\item Each tree is grown to the largest extent possible. There is no pruning.
+\end{enumerate}
+
+In the original paper on random forests, it was shown that the forest error rate depends on two things:
+
+\begin{enumerate}
+\item The correlation between any two trees in the forest. Increasing the correlation increases the forest error rate.
+\item The strength of each individual tree in the forest. A tree with a low error rate is a strong classifier. Increasing the strength of the individual trees decreases the forest error rate.
+\end{enumerate}
+
+Reducing m reduces both the correlation and the strength. Increasing it increases both. Somewhere in between is an ``optimal" range of m - usually quite wide. Using the oob error rate a value of m in the range can quickly be found. This is the only adjustable parameter to which random forests is somewhat sensitive \cite{breiman}.
+
+5) \textit{IBk}: This is an implementation of the k-nearest neighbors algorithm. This basic instance-based algorithm assumes all instances correspond to points in the n-dimensional space. The nearest neighbors of an instance are defined in terms of the standard Euclidean or Manhattan distance. The value of the classification label for an input x returned by this algorithm is just the most common value of label among the k training examples nearest to x \cite{Mitchell}.
+
+6) \textit{SMO}: Sequential minimal optimization (SMO) is an algorithm for solving the optimization problem which arises during the training of support vector machines. It was invented by John Platt in 1998 at Microsoft Research. SMO is widely used for training support vector machines and is implemented by the popular LIBSVM tool. SMO breaks the optimization problem in SVM into a series of smallest possible sub-problems, which are then solved analytically \cite{smo}.
 
 \section{Proposed Approach}
 
-
 \section{Experimental Setup and Results}
-
 
 \section{Related Work}
 
 \section{Conclusions and Future Work}
-
-
 
 \begin{thebibliography}{1}
 
@@ -80,6 +122,30 @@ A. J. Meier. \textit{Defining Politeness: Universality in Appropriateness}
 
 \bibitem{Jurafsky}
 Cristian Danescu-Niculescu-Mizil, Moritz Sudhof, Dan Jurafsky, Jure Leskovec and Christopher Potts. \textit{A computational approach to politeness with application to social factors}.
+
+\bibitem{Brown1}
+BROWN, P. and LEVINSON, S. 1978. \textit{Universals in Language Usage: Politeness Phenomena}. In E. Goody (ed.), Questions and Politeness, 56-289. Cambridge University Press, Cambridge.
+
+\bibitem{Brown2}
+BROWN, P. and LEVINSON, S. 1987 \textit{Politeness: Some Universals in Language Usage}. Cambridge University Press, Cambridge.
+
+\bibitem{Fraser}
+Bruce Fraser. \textit{Perspectives on Politeness}
+
+\bibitem{Mitchell}
+Tom Mitchell. \textit{Machine Learning} McGraw-Hill Science/Engineering/Math; 1 edition (March 1, 1997)
+
+\bibitem{Nigam}
+Andrew McCallum and Kamal Nigam. \textit{A Comparison of Event Models for Naive Bayes Text Classification}
+
+\bibitem{j48}
+http://en.wikipedia.org/wiki/C4.5\_algorithm
+
+\bibitem{breiman}
+www.stat.berkeley.edu/~breiman/RandomForests/cc\_home.htm
+
+\bibitem{smo}
+http://en.wikipedia.org/wiki/Sequential\_minimal\_optimization
 
 \end{thebibliography}
 

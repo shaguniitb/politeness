@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  14 DEC 2013 16:59
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  14 DEC 2013 19:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -201,9 +201,58 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 44.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 44.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 44.
+ [1
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 79.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 79.
+
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 79.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
+File: omlptm.fd 
+)
+LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 79.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+[]\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
+8 McGraw-Hill Sci-
+ []
 
 
 ** Conference Paper **
@@ -216,17 +265,16 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[1
-
+[3
 
 ] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
- 2816 strings out of 495060
- 46533 string characters out of 3182053
- 108425 words of memory out of 3000000
- 6035 multiletter control sequences out of 15000+200000
- 25356 words of font info for 55 fonts, out of 3000000 for 9000
+ 2858 strings out of 495060
+ 47066 string characters out of 3182053
+ 114425 words of memory out of 3000000
+ 6068 multiletter control sequences out of 15000+200000
+ 27179 words of font info for 61 fonts, out of 3000000 for 9000
  17 hyphenation exceptions out of 8191
- 36i,6n,38p,762b,190s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,6n,38p,960b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project_report.dvi (1 page, 4252 bytes).
+Output written on Project_report.dvi (3 pages, 17536 bytes).
