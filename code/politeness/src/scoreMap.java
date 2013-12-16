@@ -22,6 +22,8 @@ public class scoreMap {
 	public int numCounterFactual = 0;
 	public int numIndicative = 0;
 	
+	public int firstPersonStart = 0;
+	
 	public String getId(){
 		return id;
 	}

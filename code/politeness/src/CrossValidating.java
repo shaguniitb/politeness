@@ -125,9 +125,9 @@ public class CrossValidating {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		String input_arff = "../../weka-3-6-10/stack_Ling.arff";
+		String input_arff = "../../weka-3-6-10/wiki_BOW.arff";
 		
-		String main_folder = "results/in-domain_stack_Ling";
+		String main_folder = "results/in-domain_wiki_BOW_now";
 		File data = new File(main_folder);
 		String folder = null;
 		data.mkdir();

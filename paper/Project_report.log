@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  14 DEC 2013 19:49
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  16 DEC 2013 17:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,7 +249,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 136--137
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
 []\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
 8 McGraw-Hill Sci-
  []
@@ -267,14 +267,14 @@ Before submitting the final camera ready copy, remember to:
 
 [3
 
-] (./Project_report.aux) ) 
+] [4] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
- 2858 strings out of 495060
- 47066 string characters out of 3182053
- 114425 words of memory out of 3000000
- 6068 multiletter control sequences out of 15000+200000
+ 2867 strings out of 495060
+ 47231 string characters out of 3182053
+ 125425 words of memory out of 3000000
+ 6077 multiletter control sequences out of 15000+200000
  27179 words of font info for 61 fonts, out of 3000000 for 9000
  17 hyphenation exceptions out of 8191
- 36i,6n,38p,960b,218s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,38p,960b,255s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project_report.dvi (3 pages, 17536 bytes).
+Output written on Project_report.dvi (4 pages, 29316 bytes).

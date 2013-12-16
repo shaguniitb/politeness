@@ -9,6 +9,7 @@ results/in-domain_stack_Ling/pre_alpha/ibk_10_KNN_EuclideanDistance.txt	0.45
 results/in-domain_stack_Ling/pre_alpha/ibk_1_KNN_ManhattanDistance.txt	0.42
 results/in-domain_stack_Ling/pre_alpha/ibk_10_KNN_ManhattanDistance.txt	0.46
 results/in-domain_stack_Ling/pre_alpha/SMO.txt	0.27
+
 results/in-domain_stack_Ling/pre_word/naive_bayes.txt	0.31
 results/in-domain_stack_Ling/pre_word/naive_bayes_multinomial.txt	0.27
 results/in-domain_stack_Ling/pre_word/J48.txt	0.33
@@ -19,6 +20,7 @@ results/in-domain_stack_Ling/pre_word/ibk_10_KNN_EuclideanDistance.txt	0.42
 results/in-domain_stack_Ling/pre_word/ibk_1_KNN_ManhattanDistance.txt	0.41
 results/in-domain_stack_Ling/pre_word/ibk_10_KNN_ManhattanDistance.txt	0.46
 results/in-domain_stack_Ling/pre_word/SMO.txt	0.26
+
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/naive_bayes.txt	0.28
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/naive_bayes_multinomial.txt	0.25
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/J48.txt	0.29
@@ -29,6 +31,7 @@ results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/ibk_10_KNN_Eucli
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/ibk_1_KNN_ManhattanDistance.txt	0.36
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/ibk_10_KNN_ManhattanDistance.txt	0.31
 results/in-domain_stack_Ling/pre_alpha_with_attribute_selection/SMO.txt	0.25
+
 results/in-domain_stack_Ling/pre_word_with_attribute_selection/naive_bayes.txt	0.28
 results/in-domain_stack_Ling/pre_word_with_attribute_selection/naive_bayes_multinomial.txt	0.26
 results/in-domain_stack_Ling/pre_word_with_attribute_selection/J48.txt	0.3

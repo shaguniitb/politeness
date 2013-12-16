@@ -109,7 +109,152 @@ Reducing m reduces both the correlation and the strength. Increasing it increase
 
 \section{Proposed Approach}
 
-\section{Experimental Setup and Results}
+\section{Experimental Results}
+
+This section describes the results for the experiments are described below:
+
+\subsection{In-domain Experiments}
+Four sets of experiments are done for in-domain analysis using a 5-fold cross-validation. 
+
+The correctly classified instances (by \%) for In-domain analysis on Wikipedia requests using Bag of Words classifiers are shown in table \ref{table:in-domain-wiki-BOW}.
+
+\begin{table*}[htbp]
+\caption{In-domain analysis on Wikipedia requests using Bag of Words classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 74.5864\% & 74.4945\% & 77.2518\% & 77.068\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 78.9063\% & 79.6415\% & 80.5147\% & 80.1471\% \\ 
+\hline
+\textbf{J48} & 70.864\% & 71.2776\% & 73.7132\% & 74.3107\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 74.5404\% & 73.6673\% & 76.7004\% & 76.6085\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 80.7445\% & 80.193\% & 80.3309\% & 79.8254\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 64.8897\% & 64.1544\% & 71.2316\% & 70.6342\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 59.1912\% & 58.9154\% & 76.7463\% & 76.7923\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 63.2813\% & 63.1434\% & 71.2316\% & 69.1636\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 56.4338\% & 56.1581\% & 74.6783\% & 73.4835\% \\ 
+\hline
+\textbf{SMO} & 80.193\% & 79.8713\% & 82.307\% & 82.2151\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:in-domain-wiki-BOW}
+\end{table*}
+
+The correctly classified instances (by \%) for In-domain analysis on Wikipedia requests using Linguistic classifiers are shown in table \ref{table:in-domain-wiki-Ling}.
+
+\begin{table*}[htbp]
+\caption{In-domain analysis on Wikipedia requests using Linguistic classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 74.4485\% & 74.7702\% & 77.0221\% & 76.3327\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 80.7904\% & 80.239\% & 80.4688\% & 80.3309\% \\ 
+\hline
+\textbf{J48} & 72.7022\% & 72.4265\% & 75\% & 73.3456\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 72.932\% & 74.7702\% & 76.7004\% & 77.4357\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 79.9173\% & 80.6066\% & 80.1011\% & 80.4228\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 64.6599\% & 64.8438\% & 71.4614\% & 71.829\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 60.2022\% & 59.6967\% & 76.5165\% & 76.7923\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 64.6599\% & 64.8897\% & 70.5423\% & 70.5423\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 59.4669\% & 59.5129\% & 74.6783\% & 74.9081\% \\ 
+\hline
+\textbf{SMO} & 81.3879\% & 80.3768\% & 82.2151\% & 81.0202\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:in-domain-wiki-Ling}
+\end{table*}
+
+The correctly classified instances (by \%) for In-domain analysis on Stack Exchange requests using Bag of Words classifiers are shown in table \ref{table:in-domain-stack-BOW}.
+
+\begin{table*}[htbp]
+\caption{In-domain analysis on Stack Exchange requests using Bag of Words classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 68.4\% & 67.7\% & 71.8\% & 71.2\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 71.8\% & 71.55\% & 72.35\% & 71.4\% \\ 
+\hline
+\textbf{J48} & 67.15\% & 65.9\% & 69.05\% & 69.75\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 69.5\% & 68.75\% & 70.15\% & 69.95\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 73.6\% & 73.45\% & 72.35\% & 72.45\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 57.7\% & 58.85\% & 65.75\% & 65.6\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 53.2\% & 53.15\% & 66.95\% & 66.35\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 56.9\% & 56.85\% & 65.9\% & 63.55\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 51.35\% & 51.95\% & 64.6\% & 63.1\% \\ 
+\hline
+\textbf{SMO} & 74.55\% & 73.5\% & 74.8\% & 75.05\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:in-domain-stack-BOW}
+\end{table*}
+
+The correctly classified instances (by \%) for In-domain analysis on Stack Exchange requests using Linguistic classifiers are shown in table \ref{table:in-domain-stack-Ling}.
+
+\begin{table*}[htbp]
+\caption{In-domain analysis on Stack Exchange requests using Linguistic classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 68.45\% & 68.55\% & 72.4\% & 72.4\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 72.85\% & 72.7\% & 74.6\% & 74.4\% \\ 
+\hline
+\textbf{J48} & 67.7\% & 67.25\% & 71.1\% & 69.65\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 69.15\% & 67.35\% & 71.6\% & 70.25\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 74.2\% & 74.15\% & 73.35\% & 72.75\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 58.4\% & 59.2\% & 64.9\% & 63.5\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 55.25\% & 57.65\% & 71.2\% & 71.15\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 58.3\% & 58.6\% & 63.8\% & 63.15\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 53.55\% & 54.45\% & 68.8\% & 67.85\% \\ 
+\hline
+\textbf{SMO} & 72.95\% & 73.95\% & 75\% & 75.95\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:in-domain-stack-Ling}
+\end{table*}
 
 \section{Related Work}
 
