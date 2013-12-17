@@ -23,3 +23,4 @@ results/in-domain_wiki_BOW_now/pre_alpha_with_attribute_selection/naive_bayes.tx
 results/in-domain_wiki_BOW_now/pre_alpha_with_attribute_selection/naive_bayes_multinomial.txt	0.2
 results/in-domain_wiki_BOW_now/pre_alpha_with_attribute_selection/J48.txt	0.25
 results/in-domain_wiki_BOW_now/pre_alpha_with_attribute_selection/random_forest_10_trees.txt	0.23
+results/blogs_wiki_BOW/pre_alpha/SMO.txt	0.0
