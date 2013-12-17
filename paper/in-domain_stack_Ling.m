@@ -1,0 +1,18 @@
+x=1:11;
+p1 = [68.45 68.55 72.4 72.4];
+p2 = [72.85 72.7 74.6 74.4];
+p3 = [67.7 67.25 71.1 69.65];
+p4 = [69.15 67.35 71.6 70.25];
+p5 = [74.2 74.15 73.35 72.75];
+p6 = [58.4 59.2 64.9 63.5];
+p7 = [55.25 57.65 71.2 71.15];
+p8 = [58.3 58.6 63.8 63.15];
+p9 = [53.55 54.45 68.8 67.85];
+p10 = [72.95 73.95 75 75.95];
+plot(x, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+xlabel('Test Type');
+ylabel('Correctly classified instances(%)');
+legend('Naive Bayes', 'Naive Bayes Multinomial', 'J48', 'Random Forest (10 trees)', 'Random Forest (100 trees)', 'iBK (k=1, using Euclidean Distance)', 'iBK (k=10, using Euclidean Distance)', 'iBK (k=1, using Manhattan Distance)', 'iBK (k=10, using Manhattan Distance)', 'SMO');
+figureHandle = gcf;
+set(findall(figureHandle,'type','text'),'fontSize',26);
+set(gca,'fontsize',20);set(h,'LineWidth',5);

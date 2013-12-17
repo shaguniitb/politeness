@@ -8,7 +8,7 @@ folders = ['in-domain_wiki_BOW', 'in-domain_wiki_Ling', 'in-domain_stack_BOW', '
 for folder in folders:
     test_types = ["pre_alpha", "pre_word", "pre_alpha_with_attribute_selection", "pre_word_with_attribute_selection"]
     for test_type in test_types:
-        input_dir = "/home/shagun/politeness/code/politeness/results/cross-domain/" + folder + "/" + test_type;
+        input_dir = "/home/shagun/politeness/code/politeness/results/in-domain/" + folder + "/" + test_type;
         a[test_type] = {}
         os.chdir(input_dir)
         for input_file in glob.glob("*.txt"):
@@ -34,18 +34,28 @@ for folder in folders:
                         'SMO': 'SMO'
                     }   
     f = open('/home/shagun/politeness/paper/' + folder + '.m', 'w')
+    count = 1
+    f.write('x=1:11;\n')
     for classifier in classifiers:
-        f.write('\\textbf{' + classifier_name[classifier] + '}')
-        f.write(' & ')
-        f.write(a['pre_alpha'][classifier])
-        f.write(' & ')
-        f.write(a['pre_word'][classifier])
-        f.write(' & ')
-        f.write(a['pre_alpha_with_attribute_selection'][classifier])
-        f.write(' & ')
-        f.write(a['pre_word_with_attribute_selection'][classifier])
-        f.write(' \\\ ')
-        f.write('\n')
-        f.write('\hline')
-        f.write('\n')
+        line = 'p' + str(count) + ' = ['
+        line += a['pre_alpha'][classifier][:-2]
+        line += ' ' 
+        line += a['pre_word'][classifier][:-2]
+        line += ' ' 
+        line += a['pre_alpha_with_attribute_selection'][classifier][:-2]
+        line += ' ' 
+        line += a['pre_word_with_attribute_selection'][classifier][:-2]
+        line += '];\n' 
+        f.write(line)
+        count = count + 1
+    f.write('plot(x, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);\n')
+    f.write("xlabel('Test Type');\n")
+    f.write("ylabel('Correctly classified instances(%)');\n")
+    f.write("legend('Naive Bayes', 'Naive Bayes Multinomial', 'J48', 'Random Forest (10 trees)', 'Random Forest (100 trees)', 'iBK (k=1, using Euclidean Distance)', 'iBK (k=10, using Euclidean Distance)', 'iBK (k=1, using Manhattan Distance)', 'iBK (k=10, using Manhattan Distance)', 'SMO');\n")
+    f.write('figureHandle = gcf;\n')
+    f.write("set(findall(figureHandle,'type','text'),'fontSize',26);\n")
+    f.write("set(gca,'fontsize',20);")
+    f.write("set(h,'LineWidth',5);")
+    f.close()
+
 
