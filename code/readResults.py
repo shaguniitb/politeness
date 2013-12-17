@@ -6,7 +6,7 @@ import os
 a = {}
 test_types = ["pre_alpha", "pre_word", "pre_alpha_with_attribute_selection", "pre_word_with_attribute_selection"]
 for test_type in test_types:
-    input_dir = "/home/shagun/politeness/code/politeness/results/in-domain/in-domain_stack_Ling/" + test_type;
+    input_dir = "/home/shagun/politeness/code/politeness/results/cross-domain/cross-domain_stack_Ling/" + test_type;
     a[test_type] = {}
     os.chdir(input_dir)
     for input_file in glob.glob("*.txt"):

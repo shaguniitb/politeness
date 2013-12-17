@@ -111,7 +111,7 @@ Reducing m reduces both the correlation and the strength. Increasing it increase
 
 \section{Experimental Results}
 
-This section describes the results for the experiments are described below:
+This section describes the results for the experiments.
 
 \subsection{In-domain Experiments}
 Four sets of experiments are done for in-domain analysis using a 5-fold cross-validation. 
@@ -255,6 +255,150 @@ The correctly classified instances (by \%) for In-domain analysis on Stack Excha
 \end{tabular}
 \label{table:in-domain-stack-Ling}
 \end{table*}
+
+\subsection{Cross-domain Experiments}
+Four sets of experiments are done for cross-domain analysis using a 5-fold cross-validation. 
+
+The correctly classified instances (by \%) for Cross-domain analysis with Wikipedia requests for training and Stack Exchange requests for testing and using Bag of Words classifiers are shown in table \ref{table:cross-domain-wiki-BOW}.
+
+\begin{table*}[htbp]
+\caption{Cross-domain analysis with Wikipedia requests for training and Stack Exchange requests for testing and using Bag of Words classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 63.1\% & 62.7\% & 65.35\% & 64.85\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 66.45\% & 66\% & 66.55\% & 66.5\% \\ 
+\hline
+\textbf{J48} & 62.55\% & 61.6\% & 60.4\% & 61.1\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 64.85\% & 64.95\% & 64.05\% & 64.35\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 66.2\% & 66.25\% & 64.65\% & 64.65\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 55.05\% & 55\% & 62.6\% & 63.25\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 50.45\% & 50.25\% & 61.15\% & 61.35\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 54.7\% & 54.3\% & 61.05\% & 60.55\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 50.5\% & 50.35\% & 58.35\% & 58.75\% \\ 
+\hline
+\textbf{SMO} & 64.65\% & 65.55\% & 65.35\% & 64.4\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:cross-domain-wiki-BOW}
+\end{table*}
+
+The correctly classified instances (by \%) for Cross-domain analysis with Wikipedia requests for training and Stack Exchange requests for testing and using Linguistic classifiers are shown in table \ref{table:cross-domain-wiki-Ling}.
+
+\begin{table*}[htbp]
+\caption{Cross-domain analysis with Wikipedia requests for training and Stack Exchange requests for testing and using Linguistic classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 64.4\% & 64.35\% & 65.55\% & 65.55\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 66.3\% & 66\% & 66.3\% & 66.5\% \\ 
+\hline
+\textbf{J48} & 61.45\% & 61.2\% & 61.05\% & 60.85\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 63.95\% & 62.3\% & 65.1\% & 63.45\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 62.85\% & 63.65\% & 64.65\% & 64.65\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 56.75\% & 56.75\% & 63.35\% & 62.5\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 51.85\% & 51.9\% & 60.4\% & 60.7\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 55.15\% & 55.65\% & 60.1\% & 59.6\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 51.35\% & 50.95\% & 58.05\% & 59.35\% \\ 
+\hline
+\textbf{SMO} & 64.9\% & 64.95\% & 65.8\% & 65.45\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:cross-domain-wiki-Ling}
+\end{table*}
+
+The correctly classified instances (by \%) for Cross-domain analysis with Stack Exchange requests for training and Wikipedia requests for testing and using Bag of Words classifiers are shown in table \ref{table:cross-domain-stack-BOW}.
+
+\begin{table*}[htbp]
+\caption{Cross-domain analysis with Stack Exchange requests for training and Wikipedia requests for testing and using Bag of Words classifiers}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 60.9375\% & 61.1213\% & 66.0386\% & 65.3493\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 68.9338\% & 68.75\% & 65.4412\% & 65.579\% \\ 
+\hline
+\textbf{J48} & 62.1783\% & 62.546\% & 64.0625\% & 64.7518\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 66.9577\% & 64.568\% & 66.682\% & 67.6471\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 70.5423\% & 68.9338\% & 68.1985\% & 68.4743\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 57.1691\% & 57.5827\% & 62.5919\% & 62.9596\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 53.3088\% & 52.8952\% & 66.5441\% & 66.4522\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 56.5257\% & 56.296\% & 61.2592\% & 61.6728\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 52.0221\% & 52.0221\% & 64.9816\% & 64.8897\% \\ 
+\hline
+\textbf{SMO} & 71.0938\% & 71.3235\% & 68.704\% & 68.75\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:cross-domain-stack-BOW}
+\end{table*}
+
+The correctly classified instances (by \%) for Cross-domain analysis with Stack Exchange requests for training and Wikipedia requests for testing and using Linguistic classifiers are shown in table \ref{table:cross-domain-stack-Ling}.
+
+\begin{table*}[htbp]
+\caption{Cross-domain analysis with Stack Exchange requests for training and Wikipedia requests for testing and using Linguistic classifiers }
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Classifier} & \textbf{pre\_alpha} & \textbf{pre\_word} & \textbf{pre\_alpha\_with\_attribute\_selection} & \textbf{pre\_word\_with\_attribute\_selection} \\
+\hline\hline
+\textbf{Naive Bayes} & 60.8915\% & 60.9835\% & 65.3952\% & 64.568\% \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 69.761\% & 69.6691\% & 68.0147\% & 68.2904\% \\ 
+\hline
+\textbf{J48} & 62.9136\% & 60.6618\% & 65.7169\% & 65.2114\% \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 64.0625\% & 61.9945\% & 65.3952\% & 64.0625\% \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 70.0368\% & 69.0257\% & 67.4632\% & 66.9577\% \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 58.1801\% & 57.8125\% & 57.5827\% & 58.1342\% \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 55.239\% & 53.3548\% & 63.1434\% & 62.8676\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 58.7776\% & 57.307\% & 57.5368\% & 57.9963\% \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 53.7224\% & 53.171\% & 64.1544\% & 64.0165\% \\ 
+\hline
+\textbf{SMO} & 70.9099\% & 71.6452\% & 69.761\% & 69.4393\% \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:cross-domain-stack-Ling}
+\end{table*}
+
 
 \section{Related Work}
 
