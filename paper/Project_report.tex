@@ -107,7 +107,74 @@ Reducing m reduces both the correlation and the strength. Increasing it increase
 
 6) \textit{SMO}: Sequential minimal optimization (SMO) is an algorithm for solving the optimization problem which arises during the training of support vector machines. It was invented by John Platt in 1998 at Microsoft Research. SMO is widely used for training support vector machines and is implemented by the popular LIBSVM tool. SMO breaks the optimization problem in SVM into a series of smallest possible sub-problems, which are then solved analytically \cite{smo}.
 
-\section{Proposed Approach}
+\section{Experiments}
+Our training data is from two different domains:
+\begin{enumerate}
+\item Wikipedia
+\item Stack Exchange
+\end{enumerate}
+
+We experiment on two different types of classifiers: 
+\begin{enumerate}
+\item Bag of Words classifier (BOW)
+\item Linguistically Informed classifer (Ling.)
+\end{enumerate}
+
+For Linguistically Informed classifer (Ling.), we use the following features:
+\begin{enumerate}
+\item Gratitude
+\item Deference
+\item Greeting
+\item Positive lexicon
+\item Negative lexicon
+\item Apologizing
+\item Please
+\item Please start
+\item Indirect (btw)
+\item Direct question
+\item Direct start
+\item Counterfactual modal (Could/Would)
+\item Indicative modal (Can/Will)
+\end{enumerate}
+
+We run experiments of two types:
+\begin{enumerate}
+\item In-domain:
+    We use 5-fold cross-validations for these experiments. The experiments are:
+    \begin{itemize}
+    \item Training on Wikipedia, Testing on Wikipedia
+    \item Training on Stack-Exchange, Testing on Stack-Exchange
+    \end{itemize}
+
+\item Cross-domain:
+    \begin{itemize}
+    \item Training on Wikipedia, Testing on Stack-Exchange
+    \item Training on Stack-Exchange, Testing on Wikipedia
+    \end{itemize}
+\end{enumerate}
+
+The training and 5-fold cross-validation (In-domain) is done as follows:
+\begin{enumerate}
+\item Sort the training requests by their politeness scores.
+\item Get top 25\% of requests, and label them as positive.
+\item Get bottom 25\% of requests, and label them as negative.
+\item Divide the data into 80\% for training and 20\% for testing.
+\item Run classifier training procedure on training data.
+\item Test the classifier on testing data.
+\item Go back to Step 4 to repeat the procedure for different sets of training and testing data, and then take the average performance.
+\end{enumerate}
+
+For cross-domain experiments, we train the classifiers again using Steps 1-3 above. We use the alternate domain data for testing.
+
+For each experiment type and classifier type, we have four sets of experiments:
+\begin{enumerate}
+\item Using String-to-word unsupervised filter with alphabetic tokenizer (pre\_alpha)
+\item Using String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection)
+\item Using String-to-word unsupervised filter with word tokenizer (pre\_word)
+\item Using String-to-word unsupervised filter with word tokenizer followed by attribute selection (pre\_word\_with\_attribute\_selection)
+\end{enumerate}
+
+
 We use the following settings with String-to-word unsupervised filter:
 \begin{itemize}
 \item IDFTransform: True

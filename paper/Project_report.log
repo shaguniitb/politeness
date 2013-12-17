@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2013.11.7)  16 DEC 2013 21:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2013.11.7)  16 DEC 2013 22:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -246,17 +246,37 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
  [2]
-Underfull \hbox (badness 1577) in paragraph at lines 377--378
+Underfull \hbox (badness 4072) in paragraph at lines 146--147
+[]\OT1/ptm/m/n/10 Training on Stack-Exchange, Test-ing on
+ []
+
+
+Underfull \hbox (badness 4072) in paragraph at lines 152--153
+[]\OT1/ptm/m/n/10 Training on Stack-Exchange, Test-ing on
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+[]\OT1/ptm/m/n/10 Using String-to-word un-su-per-vised fil-ter with
+ []
+
+
+Underfull \hbox (badness 4543) in paragraph at lines 174--175
+\OT1/ptm/m/n/10 word to-k-enizer fol-lowed by at-tribute se-lec-tion
+ []
+
+[3]
+Underfull \hbox (badness 1577) in paragraph at lines 444--445
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 412--413
+Underfull \hbox (badness 1577) in paragraph at lines 479--480
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 471--472
+Underfull \hbox (badness 10000) in paragraph at lines 538--539
 []\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
 8 McGraw-Hill Sci-
  []
@@ -272,14 +292,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[3] [4] [5] (./Project_report.aux) ) 
+[4] [5] [6] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
  2901 strings out of 495032
  48072 string characters out of 6181557
- 149892 words of memory out of 5000000
+ 145892 words of memory out of 5000000
  6141 multiletter control sequences out of 15000+600000
  25356 words of font info for 55 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
  36i,8n,38p,960b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Project_report.dvi (5 pages, 42540 bytes).
+Output written on Project_report.dvi (6 pages, 46032 bytes).
