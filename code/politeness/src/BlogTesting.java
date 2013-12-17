@@ -3,6 +3,7 @@ import java.io.File;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
+import weka.classifiers.bayes.NaiveBayesMultinomial;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.trees.J48;
 import weka.core.EuclideanDistance;
@@ -14,48 +15,7 @@ import weka.core.neighboursearch.LinearNNSearch;
 
 public class BlogTesting {
 
-	public static void TestingNaiveBayes(Instances training_data, Instances test_data, String folder) throws Exception{
-		Evaluation eval = new Evaluation(training_data);		
-		Classifier cls = new NaiveBayes();
-		cls.buildClassifier(training_data);
-		eval.evaluateModel(cls, test_data);		
-		CrossValidating.writeOut(folder + "/naive_bayes", eval);
-		for (int i=0; i<test_data.numInstances(); i++){
-			System.out.println("instance " + String.valueOf(i));
-			test_data.instance(i).setClassMissing();
-			double [] values = cls.distributionForInstance(test_data.instance(i));
-			for (double value: values){
-				System.out.println(value);
-			}
-			
-		}
-	}
-	
-	public static void TestingSMO(Instances training_data, Instances test_data, String folder) throws Exception{
-		Evaluation eval = new Evaluation(training_data);		
-		Classifier cls = new SMO();
-		cls.buildClassifier(training_data);
-		eval.evaluateModel(cls, test_data);		
-		CrossValidating.writeOut(folder + "/SMO", eval);
-		for (int i=0; i<test_data.numInstances(); i++){
-			System.out.println("instance " + String.valueOf(i));
-			test_data.instance(i).setClassMissing();
-			double clsi = cls.classifyInstance(test_data.instance(i));
-			System.out.println(clsi);
-			double [] values = cls.distributionForInstance(test_data.instance(i));
-			for (double value: values){
-				System.out.println(value);
-			}
-			
-		}
-	}
-	
-	public static void TestingJ48(Instances training_data, Instances test_data, String folder) throws Exception{
-		Classifier cls = new J48();
-		cls.buildClassifier(training_data);
-		Evaluation eval = new Evaluation(training_data);
-		eval.evaluateModel(cls, test_data);
-		
+	public static void testResults(Classifier cls, Instances test_data) throws Exception{
 		int numTestInstances = test_data.numInstances();
 		System.out.printf("There are %d test instances\n", numTestInstances);
 		
@@ -79,15 +39,52 @@ public class BlogTesting {
 		                                predictionDistributionIndexAsClassLabel, 
 		                                predictionProbability );
 		          }
-		       System.out.println("\n");
 		}
+		System.out.println("\n");		
+	}
+	
+	public static void TestingNaiveBayes(Instances training_data, Instances test_data, String folder) throws Exception{
+		Classifier cls = new NaiveBayes();
+		cls.buildClassifier(training_data);
+		Evaluation eval = new Evaluation(training_data);
+		eval.evaluateModel(cls, test_data);
+		System.out.println("Naive Bayes");
+		testResults(cls, test_data);
+	}
+	
+	public static void TestingNaiveBayesMultinomial(Instances training_data, Instances test_data, String folder) throws Exception{
+		Classifier cls = new NaiveBayesMultinomial();
+		cls.buildClassifier(training_data);
+		Evaluation eval = new Evaluation(training_data);
+		eval.evaluateModel(cls, test_data);
+		System.out.println("Naive Bayes Multinomial");
+		testResults(cls, test_data);
+	}
+	
+	public static void TestingJ48(Instances training_data, Instances test_data, String folder) throws Exception{
+		Classifier cls = new J48();
+		cls.buildClassifier(training_data);
+		Evaluation eval = new Evaluation(training_data);
+		eval.evaluateModel(cls, test_data);
+		System.out.println("J48");
+		testResults(cls, test_data);
+	}
+	
+	public static void TestingSMO(Instances training_data, Instances test_data, String folder) throws Exception{
+		Classifier cls = new SMO();
+		cls.buildClassifier(training_data);
+		Evaluation eval = new Evaluation(training_data);
+		eval.evaluateModel(cls, test_data);
+		System.out.println("SMO");
+		testResults(cls, test_data);
 	}
 	
 	public static void runTests(Instances data, Instances test_data, String folder) throws Exception{
 		CrossValidating.CreateFolder(folder);
+		TestingNaiveBayes(data, test_data, folder);
+		TestingNaiveBayesMultinomial(data, test_data, folder);
 		TestingJ48(data, test_data, folder);
-//		TestingNaiveBayes(data, test_data, folder);
-//		TestingSMO(data, test_data, folder);
+		TestingSMO(data, test_data, folder);
 	}
 	
 	public static void main(String[] args) throws Exception {
