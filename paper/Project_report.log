@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2013.11.7)  16 DEC 2013 21:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2013.11.7)  16 DEC 2013 21:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -185,32 +185,7 @@ fil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi
  \fi \fi .
 \c@ContinuedFloat=\count100
 Package caption Info: float package is loaded.
-) (./Project_report.aux
-
-LaTeX Warning: Label `table:in-domain-wiki-BOW' multiply defined.
-
-
-LaTeX Warning: Label `table:in-domain-wiki-Ling' multiply defined.
-
-
-LaTeX Warning: Label `table:in-domain-stack-BOW' multiply defined.
-
-
-LaTeX Warning: Label `table:in-domain-stack-Ling' multiply defined.
-
-
-LaTeX Warning: Label `table:cross-domain-wiki-BOW' multiply defined.
-
-
-LaTeX Warning: Label `table:cross-domain-wiki-Ling' multiply defined.
-
-
-LaTeX Warning: Label `table:cross-domain-stack-BOW' multiply defined.
-
-
-LaTeX Warning: Label `table:cross-domain-stack-Ling' multiply defined.
-
-)
+) (./Project_report.aux)
 \openout1 = `Project_report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
@@ -228,17 +203,9 @@ LaTeX Font Info:    ... okay on input line 16.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 44.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 44.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 44.
- [1
-
-
-]
-LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 79.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 79.
 
 
 LaTeX Warning: Command \textless invalid in math mode on input line 79.
@@ -271,31 +238,25 @@ LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
 
 LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
 
+[1
+
+
+]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-[2]
-Underfull \hbox (badness 1577) in paragraph at lines 332--333
+ [2]
+Underfull \hbox (badness 1577) in paragraph at lines 377--378
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 367--368
-[]\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
- []
-
-[3] [4] [5]
-Underfull \hbox (badness 1577) in paragraph at lines 667--668
+Underfull \hbox (badness 1577) in paragraph at lines 412--413
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 702--703
-[]\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
+Underfull \hbox (badness 10000) in paragraph at lines 471--472
 []\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
 8 McGraw-Hill Sci-
  []
@@ -311,18 +272,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[6] [7] [8] (./Project_report.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[3] [4] [5] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
- 2915 strings out of 495032
- 48210 string characters out of 6181557
- 158892 words of memory out of 5000000
- 6149 multiletter control sequences out of 15000+600000
- 27179 words of font info for 61 fonts, out of 8000000 for 9000
+ 2901 strings out of 495032
+ 48072 string characters out of 6181557
+ 149892 words of memory out of 5000000
+ 6141 multiletter control sequences out of 15000+600000
+ 25356 words of font info for 55 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
  36i,8n,38p,960b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Project_report.dvi (8 pages, 67356 bytes).
+Output written on Project_report.dvi (5 pages, 42540 bytes).
