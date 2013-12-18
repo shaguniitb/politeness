@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  17 DEC 2013 18:57
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  17 DEC 2013 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -184,11 +184,7 @@ fil }\else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi
  \fi \fi .
 \c@ContinuedFloat=\count100
 Package caption Info: float package is loaded.
-) (./Project_report.aux
-
-LaTeX Warning: Label `table:cross-domain-stack-Ling' multiply defined.
-
-)
+) (./Project_report.aux)
 \openout1 = `Project_report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
@@ -314,11 +310,7 @@ Underfull \hbox (badness 1577) in paragraph at lines 488--489
  []
 
 
-LaTeX Warning: Reference `table:blog-wiki' on page 4 undefined on input line 52
-5.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 567--568
+Underfull \hbox (badness 10000) in paragraph at lines 621--622
 []\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
 8 McGraw-Hill Sci-
  []
@@ -334,21 +326,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4] [5] [6] (./Project_report.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[4] [5] [6] [7] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
- 2858 strings out of 495060
- 47230 string characters out of 3182053
- 149425 words of memory out of 3000000
- 6074 multiletter control sequences out of 15000+200000
+ 2859 strings out of 495060
+ 47248 string characters out of 3182053
+ 165425 words of memory out of 3000000
+ 6075 multiletter control sequences out of 15000+200000
  25356 words of font info for 55 fonts, out of 3000000 for 9000
  17 hyphenation exceptions out of 8191
  36i,8n,38p,960b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Project_report.dvi (6 pages, 48724 bytes).
+Output written on Project_report.dvi (7 pages, 57044 bytes).

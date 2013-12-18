@@ -522,8 +522,7 @@ The correctly classified instances (by \%) for Cross-domain analysis with Stack 
 
 \subsection{Experiments on web logs}
 
-The classification results using Wikipedia requests for training are shown in table \ref{table:blog-wiki}
-
+The classification results using Wikipedia requests for training are shown in table \ref{table:blog-wiki}. For this, we use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
 
 \begin{table*}[htbp]
 \caption{Classification results using Wikipedia requests for training}
@@ -535,11 +534,66 @@ The classification results using Wikipedia requests for training are shown in ta
 \hline
 & polite & impolite & polite & impolite & polite & impolite & polite & impolite & polite & impolite \\
 \hline\hline
-\textbf{Naive Bayes} & 60.8915\% & 0 & 60.9835\% & 0 & 65.3952\% & 0 & 64.568\% & 0 & 123 & 0\\ 
+\textbf{Naive Bayes} & 0.0 & 1.0 & 0.0 & 1.0 & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{J48} & 0.0 & 1.0 & 0.25 & 0.75 & 0.034 & 0.966 & 0.25 & 0.75 & 0.034 & 0.966 \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 0.3 & 0.7 & 0.3 & 0.7 & 0.4 & 0.6 & 0.4 & 0.6 & 0.3 & 0.7 \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 0.33 & 0.67 & 0.46 & 0.54 & 0.47 & 0.53 & 0.54 & 0.46 & 0.42 & 0.58 \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 0.0 & 1.0 & 0.0 & 1.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 0.5 & 0.5 & 0.5 & 0.5 & 0.5 & 0.5 & 0.7 & 0.3 & 0.6 & 0.4 \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 0.0 & 1.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Manhattan Distance)} & 0.4 & 0.6 & 0.5 & 0.5 & 0.5 & 0.5 & 0.7 & 0.3 & 0.6 & 0.4 \\ 
+\hline
+\textbf{SMO} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
 \hline
 \hline
 \end{tabular}
-\label{table:cross-domain-stack-Ling}
+\label{table:blog-wiki}
+\end{table*}
+
+The classification results using Stack Exchange requests for training are shown in table \ref{table:blog-stack}. For this, we use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
+
+\begin{table*}[htbp]
+\caption{Classification results using Stack Exchange requests for training}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
+\hline
+\textbf{Classifier} & \multicolumn{2}{|c|}{\textbf{Blog 1}} & \multicolumn{2}{|c|}{\textbf{Blog 2}} & \multicolumn{2}{|c|}{\textbf{Blog 3}} & \multicolumn{2}{|c|}{\textbf{Blog 4}} & \multicolumn{2}{|c|}{\textbf{Blog 5}} \\
+\hline
+& polite & impolite & polite & impolite & polite & impolite & polite & impolite & polite & impolite \\
+\hline\hline
+\textbf{Naive Bayes} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{J48} & 0.0 & 1.0 & 0.0 & 1.0 & 0.049 & 0.951 & 0.0 & 1.0 & 0.049 & 0.951 \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 0.8 & 0.2 & 0.8 & 0.2 & 0.7 & 0.3 & 0.6 & 0.4 & 0.8 & 0.2 \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 0.7 & 0.3 & 0.67 & 0.33 & 0.49 & 0.51 & 0.68 & 0.32 & 0.45 & 0.55 \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 0.0 & 1.0 & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 0.7 & 0.3 & 0.8 & 0.2 & 0.6 & 0.4 & 0.4 & 0.6 & 0.9 & 0.1 \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 & 0.0 & 1.0 \\ 
+\hline
+\textbf{iBK (k=10, using Manhattan Distance)} & 0.7 & 0.3 & 0.8 & 0.2 & 0.6 & 0.4 & 0.6 & 0.4 & 0.4 & 0.6 \\ 
+\hline
+\textbf{SMO} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:blog-stack}
 \end{table*}
 
 \section{Related Work}
