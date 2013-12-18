@@ -220,6 +220,15 @@ In each experiment set, we collect experiment results on these classifiers:
 \item SMO (Support vector classifier)
 \end{enumerate}
 
+We observe that linguistically informed classifiers (Ling.) using String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection) generally give the best in-domain and cross-domain results. We use the classifiers to determine politeness in some blogs. We've used the blog entries from the following blogs:
+\begin{enumerate}
+\item blog 1: http://blogs.wsj.com/peggynoonan/, A Wall Street Journal Columnist
+\item blog 2: http://www.thefashionpolice.net/, A blog about shopping and style
+\item blog 3: http://www.rogerebert.com/reviews/tyler-perrys-a-madea-christmas-2013 , A blog for Movie reviews
+\item blog 4: http://www.thedailybeast.com/articles/2013/12/17/it-s-conservatives-who-really-want-christ-out-of-christmas.html, A blog dedicated to breaking news and sharp commentary
+\item blog 5: http://www.blogcatalog.com/blogs/haters-be-hatin, A satirical humour blog 
+\end{enumerate}
+
 
 \section{Experimental Results}
 
@@ -511,7 +520,27 @@ The correctly classified instances (by \%) for Cross-domain analysis with Stack 
 \label{table:cross-domain-stack-Ling}
 \end{table*}
 
+\subsection{Experiments on web logs}
 
+The classification results using Wikipedia requests for training are shown in table \ref{table:blog-wiki}
+
+
+\begin{table*}[htbp]
+\caption{Classification results using Wikipedia requests for training}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
+\hline
+\textbf{Classifier} & \multicolumn{2}{|c|}{\textbf{Blog 1}} & \multicolumn{2}{|c|}{\textbf{Blog 2}} & \multicolumn{2}{|c|}{\textbf{Blog 3}} & \multicolumn{2}{|c|}{\textbf{Blog 4}} & \multicolumn{2}{|c|}{\textbf{Blog 5}} \\
+\hline
+& polite & impolite & polite & impolite & polite & impolite & polite & impolite & polite & impolite \\
+\hline\hline
+\textbf{Naive Bayes} & 60.8915\% & 0 & 60.9835\% & 0 & 65.3952\% & 0 & 64.568\% & 0 & 123 & 0\\ 
+\hline
+\hline
+\end{tabular}
+\label{table:cross-domain-stack-Ling}
+\end{table*}
 
 \section{Related Work}
 

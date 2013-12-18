@@ -1,0 +1,5 @@
+blog 1	polite	0.3	impolite	0.7
+blog 2	polite	0.3	impolite	0.7
+blog 3	polite	0.4	impolite	0.6
+blog 4	polite	0.4	impolite	0.6
+blog 5	polite	0.3	impolite	0.7
