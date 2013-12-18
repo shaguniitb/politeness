@@ -1,12 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=latex 2013.11.6)  17 DEC 2013 19:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2013.11.7)  17 DEC 2013 21:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Project_report.tex
 (./Project_report.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
-aded.
+Babel <3.9f> and hyphenation patterns for 2 languages loaded.
 (./IEEEtran.cls
 Document Class: IEEEtran 2012/11/21 V1.8c by Harald Hanche-Olsen and Anders Chr
 istensen
@@ -155,16 +154,18 @@ File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 \Gin@req@width=\dimen118
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2012/02/19 v3.2f Customizing captions (AR)
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2012/01/12 v1.4b caption3 kernel (AR)
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
 \captionmargin=\dimen119
 \captionmargin@=\dimen120
 \captionwidth=\dimen121
-\caption@indent=\dimen122
-\caption@parindent=\dimen123
-\caption@hangindent=\dimen124
+\caption@tempdima=\dimen122
+\caption@indent=\dimen123
+\caption@parindent=\dimen124
+\caption@hangindent=\dimen125
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
 )
@@ -201,116 +202,106 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
+ [1
+
+
+]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 79.
+(Font)              <7> on input line 84.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 79.
+(Font)              <5> on input line 84.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 79.
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
 
-LaTeX Font Info:    Try loading font information for OML+ptm on input line 79.
+LaTeX Font Info:    Try loading font information for OML+ptm on input line 84.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 79.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 79.
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 79.
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 79.
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 84.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 79.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 84.
 
-[1
-
-
-]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
- [2]
-Underfull \hbox (badness 4072) in paragraph at lines 146--147
+[2]
+Underfull \hbox (badness 4072) in paragraph at lines 188--189
 []\OT1/ptm/m/n/10 Training on Stack-Exchange, Test-ing on
  []
 
 
-Underfull \hbox (badness 4072) in paragraph at lines 152--153
+Underfull \hbox (badness 4072) in paragraph at lines 194--195
 []\OT1/ptm/m/n/10 Training on Stack-Exchange, Test-ing on
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
 []\OT1/ptm/m/n/10 Using String-to-word un-su-per-vised fil-ter with
  []
 
 
-Underfull \hbox (badness 4543) in paragraph at lines 174--175
+Underfull \hbox (badness 4543) in paragraph at lines 216--217
 \OT1/ptm/m/n/10 word to-k-enizer fol-lowed by at-tribute se-lec-tion
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 223--225
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 []\OT1/ptm/m/n/10 We ob-serve that lin-guis-ti-cally in-formed clas-si-fiers
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--225
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 \OT1/ptm/m/n/10 (Ling.) us-ing String-to-word un-su-per-vised fil-ter with
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--225
+Underfull \hbox (badness 10000) in paragraph at lines 265--267
 \OT1/ptm/m/n/10 al-pha-betic to-k-enizer fol-lowed by at-tribute se-lec-tion
  []
 
 
-Underfull \hbox (badness 2626) in paragraph at lines 226--227
+Underfull \hbox (badness 2626) in paragraph at lines 268--269
 []\OT1/ptm/m/n/10 blog 2: http://www.thefashionpolice.net/, A blog
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 []\OT1/ptm/m/n/10 blog 3: http://www.rogerebert.com/reviews/tyler-
  []
 
 
-Overfull \hbox (25.90686pt too wide) in paragraph at lines 228--229
-[]\OT1/ptm/m/n/10 blog 4: http://www.thedailybeast.com/articles/2013/12/17/it-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 228--229
-\OT1/ptm/m/n/10 s-conservatives-who-really-want-christ-out-of-
- []
-
-[3]
-Underfull \hbox (badness 1577) in paragraph at lines 453--454
+Underfull \hbox (badness 1577) in paragraph at lines 495--496
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 488--489
+Underfull \hbox (badness 1577) in paragraph at lines 530--531
 []\OT1/ptm/m/n/10 The cor-rectly clas-si-fied in-stances (by %) for Cross-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 621--622
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 675--676
 []\OT1/ptm/m/n/8 Tom Mitchell. \OT1/ptm/m/it/8 Ma-chine Learn-ing \OT1/ptm/m/n/
 8 McGraw-Hill Sci-
  []
@@ -326,14 +317,14 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4] [5] [6] [7] (./Project_report.aux) ) 
+[5] [6] [7] (./Project_report.aux) ) 
 Here is how much of TeX's memory you used:
- 2859 strings out of 495060
- 47248 string characters out of 3182053
- 165425 words of memory out of 3000000
- 6075 multiletter control sequences out of 15000+200000
- 25356 words of font info for 55 fonts, out of 3000000 for 9000
+ 2904 strings out of 495032
+ 48127 string characters out of 6181557
+ 169892 words of memory out of 5000000
+ 6144 multiletter control sequences out of 15000+600000
+ 25356 words of font info for 55 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
- 36i,8n,38p,960b,256s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,38p,960b,261s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Project_report.dvi (7 pages, 57044 bytes).
+Output written on Project_report.dvi (7 pages, 62776 bytes).

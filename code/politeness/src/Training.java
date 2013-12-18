@@ -171,7 +171,7 @@ public class Training {
 		for (String line: lines){
 			line = line.trim();
 			line = line.toLowerCase();
-			if (!line.startsWith("wh") && line.endsWith("?")){
+			if (line.startsWith("wh")){
 				count++;
 			}
 		}
