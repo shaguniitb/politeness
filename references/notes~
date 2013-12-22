@@ -1,34 +1,3 @@
-First Approach:
-
-Classifying requests according to words.
-
-For each word, collect the politeness score assigned to the request in which it occurs.
-Create a collection of (word, list of scores)
-average list of scores for each word to get (word, average score) for each score.
-
-For testing:
-request is polite if:
-Prob(polite | request) > Prob(Impolite | request)
-or Prob(request | polite) Prob(polite) > Prob(request | impolite) Prob(impolite)
-or Prob(request | polite) > Polite(request | impolite)
-or summation (Prob(word | polite)) > summation (Prob(word | impolite))
-
-
-We'll look at two classifiers: 
-1) Bag of Words classifier (BOW)
-2) Linguistically Informed classifer (Ling.)
-
-We evaluate the classifiers first in an in-domain setting.
-So, we first train on the wikipedia data (80%) and test on wikipedia data (20%) too, using the leave-one-out cross validation procedure.
-We'll later evaluate the classifier in a cross-domain setting, where we train on one domain and test on the other.
-
-Created a dictionary 
-(class, all class instances)
-eg, ("polite", all polite requests), ("impolite", all impolite requests)
-
-Using positive and negative lexicon for building features.
- 
- This file contains a list of POSITIVE opinion words (or sentiment words).
 
 
 ;

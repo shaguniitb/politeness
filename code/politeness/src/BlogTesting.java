@@ -29,7 +29,7 @@ public class BlogTesting {
 		for (int i=0; i<numTestInstances; i++){
 			double predictionIndex = cls.classifyInstance(test_data.instance(i));
 			double [] predictionDistribution = cls.distributionForInstance(test_data.instance(i));
-			output = "blog " + String.valueOf(i+1);
+			output = "blog " + String.valueOf(i+6);
 		       for (int predictionDistributionIndex = 0; 
 		               predictionDistributionIndex < predictionDistribution.length; 
 		               predictionDistributionIndex++)
@@ -137,9 +137,9 @@ public class BlogTesting {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		String input_arff = "../../weka-3-6-10/stack_Ling.arff";
-		String test_arff = "../../weka-3-6-10/blogs.arff";
+		String test_arff = "../../weka-3-6-10/kblogs.arff";
 		
-		String main_folder = "results/blogs_stack_Ling";
+		String main_folder = "results/kblogs_stack_Ling";
 		File data = new File(main_folder);
 		String folder = null;
 		data.mkdir();

@@ -4,7 +4,7 @@ import os
 
 # wiki-Ling with blogs
 a = {}
-input_dir = "/home/shagun/politeness/code/politeness/results/blogs_stack_Ling/pre_alpha_with_attribute_selection"
+input_dir = "/home/shagun/Acads/Fall_2013/politeness/code/politeness/results/kblogs_stack_Ling/pre_alpha_with_attribute_selection"
 os.chdir(input_dir)
 for input_file in glob.glob("*.txt"):
     classifier = input_file.split(".txt")[0]
@@ -28,10 +28,10 @@ classifier_name = {'naive_bayes': 'Naive Bayes',
                     'ibk_10_KNN_ManhattanDistance':'iBK (k=10, using Manhattan Distance)',
                     'SMO': 'SMO'
                 }   
-f = open('/home/shagun/politeness/paper/temp_for_latex.txt', 'w')
+f = open('/home/shagun/Acads/Fall_2013/politeness/paper/temp_for_latex.txt', 'w')
 for classifier in classifiers:
     f.write('\\textbf{' + classifier_name[classifier] + '}')
-    for i in range(1,6):
+    for i in range(6,11):
         key = 'Blog ' + str(i)
         f.write(' & ')
         f.write(a[classifier][key]['polite'])

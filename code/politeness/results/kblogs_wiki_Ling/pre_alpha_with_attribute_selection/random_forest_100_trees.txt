@@ -1,0 +1,5 @@
+blog 6	polite	0.4	impolite	0.6
+blog 7	polite	0.35	impolite	0.65
+blog 8	polite	0.53	impolite	0.47
+blog 9	polite	0.37	impolite	0.63
+blog 10	polite	0.56	impolite	0.44

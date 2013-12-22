@@ -5,7 +5,7 @@ import os
 import arff
 
 input_dir = "politeness/data/blogs";
-output_file = "/home/shagun/politeness/weka-3-6-10/blogs.arff";
+output_file = "/home/shagun/Acads/Fall_2013/politeness/weka-3-6-10/kblogs.arff";
 
 os.chdir(input_dir)
 firstLine = True
@@ -48,8 +48,8 @@ for input_file in glob.glob("*.txt"):
     gratitudeList = ["appreciate", "thankful", "grateful", "recognize", "indebted"]
     deferenceList = ["Nice work", "respect", "polite"]
     greetingList = ["Hey", "Hi", "Hello", "take care", "tc", "bye", "Good morning", "Good afternoon", "Good evening", "Good night", "gn", "Dear", "howdy", "ciao", "what's up", "wassup", "yo", "whassup", "welcome", "hail"]
-    positiveList = lexiconList("/home/shagun/politeness/code/politeness/data/positive-words.txt")
-    negativeList = lexiconList("/home/shagun/politeness/code/politeness/data/negative-words.txt")
+    positiveList = lexiconList("/home/shagun/Acads/Fall_2013/politeness/code/politeness/data/positive-words.txt")
+    negativeList = lexiconList("/home/shagun/Acads/Fall_2013/politeness/code/politeness/data/negative-words.txt")
     apologizingList = ["sorry", "pardon", "regret", "apologize", "ashamed", "regretful", "penitent"]
 
     numGratitude = checkInList(gratitudeList, request)

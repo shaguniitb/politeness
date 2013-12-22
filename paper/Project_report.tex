@@ -29,10 +29,11 @@ The University of Texas at Dallas \\
 Richardson, Texas 75080\\
 Email: sxj124330@utdallas.edu}
 \and
-\IEEEauthorblockN{Guide: Prof. Yang Liu}
+\IEEEauthorblockN{Latifur Khan}
 \IEEEauthorblockA{Dept. of Computer Science\\
 The University of Texas at Dallas \\
-Richardson, Texas 75080}
+Richardson, Texas 75080\\
+Email: lkhan@utdallas.edu}
 }
 
 
@@ -46,9 +47,9 @@ Richardson, Texas 75080}
 
 \begin{abstract}
 %\boldmath
-A computational approach to politeness with application to social factors
+We develop a computational framework for identifying and characterizing politeness markings in text documents. We present a comparative study of the results of classifiers constructed using a variety of different algorithms, filters and features. We also use this framework to study the politeness levels in a diverse range of web-logs.
 
-Index Terms - Politeness Theory, Classification, SVM
+Index Terms - Politeness Theory, Classification, SMO
 \end{abstract}
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
@@ -179,6 +180,8 @@ Factuality & Contains phrases like ``In fact" \\
 \label{table:lingFeatures}
 \end{table*}
 
+We use Weka (Waikato Environment for Knowledge Analysis), a popular suite of machine learning software written in Java, developed at the University of Waikato, New Zealand for all our experiments.
+
 We run experiments of two types:
 \begin{enumerate}
 \item In-domain:
@@ -262,14 +265,39 @@ In each experiment set, we collect experiment results on these classifiers:
 \item SMO (Support vector classifier)
 \end{enumerate}
 
-We observe that linguistically informed classifiers (Ling.) using String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection) generally give the best in-domain and cross-domain results. We use the classifiers to determine politeness in some blogs. We've used the blog entries from the following blogs:
-\begin{enumerate}
-\item blog 1: http://blogs.wsj.com/peggynoonan/, A Wall Street Journal Columnist
-\item blog 2: http://www.thefashionpolice.net/, A blog about shopping and style
-\item blog 3: http://www.rogerebert.com/reviews/tyler-perrys-a-madea-christmas-2013 , A blog for Movie reviews
-\item blog 4: http://www.thedailybeast.com/, A blog dedicated to breaking news and sharp commentary
-\item blog 5: http://www.blogcatalog.com/blogs/haters-be-hatin, A satirical humour blog 
-\end{enumerate}
+We observe that linguistically informed classifiers (Ling.) using String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection) generally give the best in-domain and cross-domain results. We use the classifiers to determine politeness in some blogs. We've used the blog entries from the blogs described in Table \ref{table:listBlogs}.
+\begin{table*}[htbp]
+\caption{Blogs used in testing}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|l|l|}
+\hline
+Blog no. & url & Description \\
+\hline\hline
+blog 1 & http://blogs.wsj.com/peggynoonan/ & A Wall Street Journal Columnist \\
+\hline
+blog 2 & http://www.thefashionpolice.net/ & A blog about shopping and style \\
+\hline
+blog 3 & http://www.rogerebert.com/reviews/tyler-perrys-a-madea-christmas-2013 & A blog for Movie reviews \\
+\hline
+blog 4 & http://www.thedailybeast.com/ & A blog dedicated to breaking news and sharp commentary \\
+\hline
+blog 5 & http://www.blogcatalog.com/blogs/haters-be-hatin & A satirical humour blog \\
+\hline
+blog 6 & http://www.tmz.com/ & A celebrity news blog \\
+\hline
+blog 7 & http://www.samizdata.net/ & An individualistic perspective blog \\ 
+\hline
+blog 8 & http://waiterrant.net/ & A waiter's rant blog \\
+\hline
+blog 9 & http://www.hecklerspray.com/ & A gossip and reviews blog \\
+\hline
+blog 10 & http://wow.joystiq.com/ & A gaming blog \\
+\hline
+\hline
+\end{tabular}
+\label{table:listBlogs}
+\end{table*}
 
 
 \section{Experimental Results}
@@ -566,10 +594,10 @@ The correctly classified instances (by \%) for Cross-domain analysis with Stack 
 
 We now use some of the best classifiers we observed in the previous experiments to determine the politeness for blog entries of some popular blogs. The source for these blogs are discussed in the `Experiments' section. For each experiment, we show the probability that the classifier assigns to each blog entry being `polite' and being `impolite'. These probabilities are on a scale of 0 to 1.
 
-The classification results using Wikipedia requests for training are shown in Table \ref{table:blog-wiki}. For this, we use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
+The classification results for blog 1 - blog 5 using Wikipedia requests for training are shown in Table \ref{table:blog-wiki}. For this, we use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
 
 \begin{table*}[htbp]
-\caption{Classification results using Wikipedia requests for training}
+\caption{Classification results using Wikipedia requests for training for blog 1 - blog 5}
 \centering
 \vspace{5pt}
 \begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
@@ -603,10 +631,10 @@ The classification results using Wikipedia requests for training are shown in Ta
 \label{table:blog-wiki}
 \end{table*}
 
-The classification results using Stack Exchange requests for training are shown in Table \ref{table:blog-stack}. For this, we again use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
+The classification results for blog 1 - blog 5 using Stack Exchange requests for training are shown in Table \ref{table:blog-stack}. For this, we again use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
 
 \begin{table*}[htbp]
-\caption{Classification results using Stack Exchange requests for training}
+\caption{Classification results using Stack Exchange requests for training for blog 1 - blog 5}
 \centering
 \vspace{5pt}
 \begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
@@ -640,18 +668,104 @@ The classification results using Stack Exchange requests for training are shown 
 \label{table:blog-stack}
 \end{table*}
 
+
+
+The classification results for blog 6 - blog 10 using Wikipedia requests for training are shown in Table \ref{table:kblog-wiki}. For this, we use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
+
+\begin{table*}[htbp]
+\caption{Classification results using Wikipedia requests for training for blog 6 - blog 10}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
+\hline
+\textbf{Classifier} & \multicolumn{2}{|c|}{\textbf{Blog 6}} & \multicolumn{2}{|c|}{\textbf{Blog 7}} & \multicolumn{2}{|c|}{\textbf{Blog 8}} & \multicolumn{2}{|c|}{\textbf{Blog 9}} & \multicolumn{2}{|c|}{\textbf{Blog 10}} \\
+\hline
+& polite & impolite & polite & impolite & polite & impolite & polite & impolite & polite & impolite \\
+\hline\hline
+\textbf{Naive Bayes} & 0.001 & 0.999 & 0.0 & 1.0 & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{J48} & 0.0 & 1.0 & 0.667 & 0.333 & 0.961 & 0.039 & 0.081 & 0.919 & 0.667 & 0.333 \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 0.5 & 0.5 & 0.5 & 0.5 & 0.6 & 0.4 & 0.4 & 0.6 & 0.5 & 0.5 \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 0.4 & 0.6 & 0.35 & 0.65 & 0.53 & 0.47 & 0.37 & 0.63 & 0.56 & 0.44 \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 0.3 & 0.7 & 0.4 & 0.6 & 0.5 & 0.5 & 0.0 & 1.0 & 0.6 & 0.4 \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 1.0 & 0.0 & 1.0 & 0.0 & 0.0 & 1.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Manhattan Distance)} & 0.3 & 0.7 & 0.5 & 0.5 & 0.4 & 0.6 & 0.4 & 0.6 & 0.7 & 0.3 \\ 
+\hline
+\textbf{SMO} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:kblog-wiki}
+\end{table*}
+
+
+The classification results for blog 6 - blog 10 using Stack Exchange requests for training are shown in Table \ref{table:kblog-stack}. For this, we again use linguistic classifiers (Ling.) applying String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection (pre\_alpha\_with\_attribute\_selection). 
+
+\begin{table*}[htbp]
+\caption{Classification results using Stack Exchange requests for training for blog 6 - blog 10}
+\centering
+\vspace{5pt}
+\begin{tabular}{|l|c|c|l|l|c|c|l|l|c|c|}
+\hline
+\textbf{Classifier} & \multicolumn{2}{|c|}{\textbf{Blog 6}} & \multicolumn{2}{|c|}{\textbf{Blog 7}} & \multicolumn{2}{|c|}{\textbf{Blog 8}} & \multicolumn{2}{|c|}{\textbf{Blog 9}} & \multicolumn{2}{|c|}{\textbf{Blog 10}} \\
+\hline
+& polite & impolite & polite & impolite & polite & impolite & polite & impolite & polite & impolite \\
+\hline\hline
+\textbf{Naive Bayes} & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{Naive Bayes Multinomial} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{J48} & 0.958 & 0.042 & 0.0 & 1.0 & 0.0 & 1.0 & 0.75 & 0.25 & 0.0 & 1.0 \\ 
+\hline
+\textbf{Random Forest (10 trees)} & 0.7 & 0.3 & 0.7 & 0.3 & 0.8 & 0.2 & 0.5 & 0.5 & 0.5 & 0.5 \\ 
+\hline
+\textbf{Random Forest (100 trees)} & 0.73 & 0.27 & 0.65 & 0.35 & 0.73 & 0.27 & 0.47 & 0.53 & 0.71 & 0.29 \\ 
+\hline
+\textbf{iBK (k=1, using Euclidean Distance)} & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 & 0.0 & 1.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Euclidean Distance)} & 0.3 & 0.7 & 0.2 & 0.8 & 0.5 & 0.5 & 0.273 & 0.727 & 0.5 & 0.5 \\ 
+\hline
+\textbf{iBK (k=1, using Manhattan Distance)} & 0.0 & 1.0 & 0.0 & 1.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\textbf{iBK (k=10, using Manhattan Distance)} & 0.5 & 0.5 & 0.3 & 0.7 & 0.6 & 0.4 & 0.273 & 0.727 & 0.4 & 0.6 \\ 
+\hline
+\textbf{SMO} & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 & 1.0 & 0.0 \\ 
+\hline
+\hline
+\end{tabular}
+\label{table:kblog-stack}
+\end{table*}
+
 \section{Related Work}
+Politeness is a source of pragmatic enrichment, social meaning, and cultural variation \cite{Jurafsky}. The social-norm view of politeness reflects the historical understanding of politeness generally embraced by the public within the English-speaking world. It assumes that each society has a particular set of social norms consisting of more or less explicit rules that prescribe a certain behavior, a state of affairs, or a way of thinking in a context. A positive evaluation (politeness) arises when an action is in congruence with the norm, a negative evaluation (impoliteness = rudeness) when action is to the contrary \cite{Fraser}.
 
+Manuals of etiquette contain aphorisms that reveal quickly this underlying assumption. The 1872 version of \textit{Ladies' Book of Etiquette and Manual of Politeness} (J. S. Locke, Boston, cited in Kasher (1986)) offers a variety of rules intended to govern polite discourse.
 
+The conversational-maxim perspective on politeness relies principally on the work of Grice (1967, published 1975) in his now-classic paper `Logic and conversation'. Grice argued that conversationalists are rational individuals who are, all other things being equal, primarily interested in the efficient conveying of messages \cite{Fraser}.
+
+By far, the most popular view of politeness is the face-saving view by Brown and Levinson. The aspects of their theory have have been explored from game-theoretic perspectives (Van Rooy, 2003) and implemented in language generation systems for interactive narratives (Walker et al., 1997), cooking instructions, (Gupta et al., 2007), translation (Faruqui and Pado, 2012), spoken dialog (Wang et al., 2012), and subjectivity analysis (Abdul-Mageed and Diab, 2012), among others.
+
+In recent years, politeness has been studied in web environments. Politeness variations across different social groups (Burke and Kraut, 2008a) and different media types (Herring, 1994; Brennan and Ohaeri, 1999; Duthler, 2006) have been researched. Danescu-Niculescu-Mizil, Sudhof, Jurafsky, Leskovec and Potts \cite{Jurafsky} pursue similar goals and construct annotated data orders of magnitude larger for a more reliable study of politeness strategies. The present paper uses this annotated data for performing classifications.
+
+Some researchers have also focused on domain-specific textual cues to study how language relates to power and status in the context of social networking (Scholand et al., 2010) and workplace discourse (Bramsen et al., ; Diehl et al., 2007; Peterson et al., 2011; Prabhakaran et al., 2012; Gilbert, 2012; McCallum et al., 2007).
 
 \section{Conclusions and Future Work}
 We train classifiers employing varying machine learning algorithms and using unsupervised and supervised filters and perform experiments in in-domain and cross-domain environments. We use linguistic features and expect the performance of classifiers to improve. We observe that in general, SMO classifiers tend to give the best performance for text classifications. The performance of SMO algorithms improve when we apply String-to-word unsupervised filter with alphabetic tokenizer followed by attribute selection. 
 
-For in-domain experiments, classifiers that don't use attribute selection, using linguistic features for training improves the performance by 2-3\%. This improvement reduces to 0-1\% when attribute selection is also used while training the classifieres. In almost every case, using linguistic features registers an improvement in the performance.
+For in-domain experiments, classifiers that don't use attribute selection, using linguistic features for training improves the performance by 2-3\%. This improvement reduces to 0-1\% when attribute selection is also used while training the classifiers. In almost every case, using linguistic features registers an improvement in the performance.
 
-These classifers perform well in cross-domain settings too. When training on Wikipedia and tested on Stack Exchange, the best performance is 65.8\%. When training on Stack Exchange and tested on Wikipedia, the best performance is 71.64\%. SMO classifiers using linguistic features give these best results.
+These classifers perform well in cross-domain settings too. When training on Wikipedia and tested on Stack Exchange, the best performance is 65.8\%. When training on Stack Exchange and tested on Wikipedia, the best performance is 71.64\%. SMO classifiers using linguistic features show these best results.
 
-We use the best classifiers to determine the politeness for blog entries of some popular blogs. We observe that a majority of classifiers classify Blogs 1, 2, 3 and 4 as polite, and Blog 5 as impolite.
+We use the better performing classifiers to determine the politeness for blog entries of some popular blogs. We observe that a majority of classifiers classify Blogs 1, 2, 3, 4, 6, 7, 8 and 10 as polite, and Blogs 5 and 9 as impolite.
 
 In future, we'd employ AdaBoosting techniques and infer if the performance improves for these experiments. We also plan to use domain adaptation techniques and use these classifiers to determine politeness in domains other than web-logs.
 
@@ -686,6 +800,18 @@ www.stat.berkeley.edu/~breiman/RandomForests/cc\_home.htm
 
 \bibitem{smo}
 http://en.wikipedia.org/wiki/Sequential\_minimal\_optimization
+
+\bibitem{}
+Vinodkumar Prabhakaran, Owen Rambow, and Mona Diab. 2012. \textit{Predicting Overt Display of Power in Written Dialogs}. In Proceedings of NAACL-HLT, pages 518–522.
+
+\bibitem{}
+Kelly Peterson, Matt Hohensee, and Fei Xia. 2011. \textit{Email formality in the workplace: A case study on the enron corpus}. In Proceedings of the ACL Workshop on Language in Social Media, pages 86–95
+
+\bibitem{}
+Minqing Hu and Bing Liu. \textit{Mining and Summarizing Customer Reviews.} Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (KDD-2004), Aug 22-25, 2004, Seattle, Washington, USA
+
+\bibitem{}
+Bing Liu, Minqing Hu and Junsheng Cheng. \textit{Opinion Observer: Analyzing and Comparing Opinions on the Web.} Proceedings of the 14th International World Wide Web conference (WWW-2005), May 10-14, 2005, Chiba, Japan.
 
 \end{thebibliography}
 
